@@ -437,6 +437,12 @@ fun ApiKeyListContent(
                                             snackbarHostState.showSnackbar(context.getString(R.string.ui_service_name_copied_clears_in_30s_a95b7e))
                                         }
                                     },
+                                    onCopyKey = {
+                                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_api_key_47acd2), apiKeyViewModel.decryptApiKey(entry))
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar(context.getString(R.string.txt_copy_af74f7))
+                                        }
+                                    },
                                     onMoveUp = if (canMoveUp) {
                                         { apiKeyViewModel.moveApiKey(apiKeys, index, -1) }
                                     } else null,
@@ -470,6 +476,7 @@ private fun ApiKeyCard(
     onClick: () -> Unit,
     onFavoriteClick: () -> Unit,
     onCopyName: () -> Unit,
+    onCopyKey: () -> Unit,
     onMoveUp: (() -> Unit)? = null,
     onMoveDown: (() -> Unit)? = null
 ) {
@@ -570,7 +577,14 @@ private fun ApiKeyCard(
                         tint = MaterialTheme.colorScheme.outline
                     )
                 }
-
+                IconButton(onClick = onCopyKey, modifier = Modifier.size(36.dp)) {
+                    Icon(
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = stringResource(R.string.ui_api_key_47acd2),
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.outline
+                    )
+                }
                 IconButton(onClick = onFavoriteClick, modifier = Modifier.size(36.dp)) {
                     Icon(
                         imageVector = if (entry.isFavorite) Icons.Default.Star

@@ -560,6 +560,12 @@ fun PasswordListContent(
                                             snackbarHostState.showSnackbar(context.getString(R.string.ui_username_copied_clears_in_30s_8461b7))
                                         }
                                     },
+                                    onCopyPassword = {
+                                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.txt_password_7cc239), passwordViewModel.decryptPassword(entry))
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar(context.getString(R.string.txt_copy_af74f7))
+                                        }
+                                    },
                                     onMoveUp = if (canMoveUp) {
                                         { passwordViewModel.movePassword(passwords, index, -1) }
                                     } else null,
@@ -595,6 +601,7 @@ private fun PasswordCard(
     onClick: () -> Unit,
     onFavoriteClick: () -> Unit,
     onCopyUsername: () -> Unit,
+    onCopyPassword: () -> Unit,
     onMoveUp: (() -> Unit)? = null,
     onMoveDown: (() -> Unit)? = null
 ) {
@@ -809,6 +816,14 @@ private fun PasswordCard(
                     )
                 }
 
+                IconButton(onClick = onCopyPassword, modifier = Modifier.size(36.dp)) {
+                    Icon(
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = stringResource(R.string.txt_password_7cc239),
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.outline
+                    )
+                }
                 IconButton(onClick = onFavoriteClick, modifier = Modifier.size(36.dp)) {
                     Icon(
                         imageVector = if (entry.isFavorite) Icons.Default.Star
