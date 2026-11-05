@@ -867,7 +867,7 @@ private fun FavoriteItemCard(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = item.subtitle,
+                    text = if (item.isPassword) item.subtitle else stringResource(R.string.ui_api_key_47acd2),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
@@ -912,7 +912,7 @@ sealed interface FavoriteItem {
     data class ApiKey(val entry: ApiKeyEntry) : FavoriteItem {
         override val id = entry.id
         override val title = entry.serviceName
-        override val subtitle = stringResource(R.string.ui_api_key_47acd2)
+        override val subtitle = ""
         override val isPassword = false
         override val icon = entry.icon
     }
