@@ -341,8 +341,8 @@
     <string name="txt_sort_passwords_0da6e8">فرز كلمات المرور</string>
     <string name="txt_title_961697">العنوان *</string>
     <string name="txt_totp_secret_key_base32_a028f7">مفتاح TOTP السري (Base32)</string>
-    <string name="txt_trash_confirm_api_item">هل أنت متأكد أنك تريد حذف '%1$s' نهائيًا؟ لا يمكن استعادته.</string>
-    <string name="txt_trash_confirm_item">هل أنت متأكد أنك تريد حذف '%1$s' نهائيًا؟ لا يمكن استعادته.</string>
+    <string name="txt_trash_confirm_api_item">هل أنت متأكد أنك تريد حذف \'%1$s\' نهائيًا؟ لا يمكن استعادته.</string>
+    <string name="txt_trash_confirm_item">هل أنت متأكد أنك تريد حذف \'%1$s\' نهائيًا؟ لا يمكن استعادته.</string>
     <string name="txt_trash_e3bf62">سلة المهملات</string>
     <string name="txt_unlock_and_pick_another_account_31eb2e">فتح واختيار حساب آخر</string>
     <string name="txt_use_this_password_5c8797">استخدام كلمة المرور هذه</string>
@@ -371,7 +371,7 @@
     <string name="ui_api_key_47acd2">مفتاح API</string>
     <string name="ui_api_key_copied_clears_in_30s_48a4a4">تم نسخ مفتاح API (يمسح خلال 30 ثانية)</string>
     <string name="ui_api_key_copied_clears_in_30s_920e8d">تم نسخ مفتاح API (يمسح خلال 30 ثانية)</string>
-    <string name="ui_api_key_deleted_ad046d">تم حذف مفتاح API '%1$s'</string>
+    <string name="ui_api_key_deleted_ad046d">تم حذف مفتاح API \'%1$s\'</string>
     <string name="ui_api_key_permanently_deleted_6f2e62">تم حذف مفتاح API بشكل دائم</string>
     <string name="ui_api_keys_13d1ca">مفاتيح API (%1$s)</string>
     <string name="ui_api_keys_e18ffc">مفاتيح API</string>
@@ -424,7 +424,7 @@
     <string name="ui_database_restored_successfully_5405b0">تم استعادة قاعدة البيانات بنجاح</string>
     <string name="ui_date_created_newest_6cb4b8">تاريخ الإنشاء (الأحدث)</string>
     <string name="ui_date_created_oldest_dcdcff">تاريخ الإنشاء (الأقدم)</string>
-    <string name="ui_date_format">MMM dd, yyyy 'at' hh:mm a</string>
+    <string name="ui_date_format">MMM dd, yyyy \'at\' hh:mm a</string>
     <string name="ui_debug_bug_ac5e32">تصحيح / خطأ</string>
     <string name="ui_default_auto_first_letter_ad3ec0">افتراضي (تلقائي / الحرف الأول)</string>
     <string name="ui_default_key_a94571">افتراضي (مفتاح)</string>
@@ -506,7 +506,7 @@
     <string name="ui_password_8be3c9">كلمة المرور</string>
     <string name="ui_password_changed_successfully_e12081">تم تغيير كلمة المرور بنجاح</string>
     <string name="ui_password_copied_clears_in_30s_741f7c">تم نسخ كلمة المرور (تمسح في 30 ثانية)</string>
-    <string name="ui_password_deleted_9dcca4">تم حذف كلمة المرور '%1$s'</string>
+    <string name="ui_password_deleted_9dcca4">تم حذف كلمة المرور \'%1$s\'</string>
     <string name="ui_password_generator_00cac0">مولد كلمة المرور</string>
     <string name="ui_password_manager">مدير كلمات المرور</string>
     <string name="ui_password_permanently_deleted_7fcdea">تم حذف كلمة المرور بشكل دائم</string>
@@ -522,8 +522,8 @@
     <string name="ui_recently_updated_04bf53">تم التحديث مؤخرًا</string>
     <string name="ui_restore_failed_262b74">فشل الاستعادة: %1$s</string>
     <string name="ui_restore_or_permanently_delete_items__0a49f0">استعادة أو حذف العناصر بشكل دائم (حذف تلقائي بعد 30 يومًا)</string>
-    <string name="ui_restored_54b383">تم استعادة '%1$s'</string>
-    <string name="ui_restored_6a488c">تم استعادة '%1$s'</string>
+    <string name="ui_restored_54b383">تم استعادة \'%1$s\'</string>
+    <string name="ui_restored_6a488c">تم استعادة \'%1$s\'</string>
     <string name="ui_reused_103b12">معاد استخدامها</string>
     <string name="ui_revoked_key_2f8616">مفتاح ملغى</string>
     <string name="ui_router_6dcf16">راوتر</string>
