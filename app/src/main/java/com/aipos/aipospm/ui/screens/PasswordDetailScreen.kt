@@ -50,6 +50,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.CustomIconStorage
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -281,9 +283,10 @@ fun PasswordDetailScreen(
                                     .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.25f)),
                                 contentAlignment = Alignment.Center
                             ) {
-                                if (customIcon != null) {
-                                    Icon(
-                                        imageVector = customIcon,
+                                if (customIcon != null || CustomIconStorage.isCustomIcon(entry.icon)) {
+                                    VaultIconDisplay(
+                                        iconId = entry.icon,
+                                        fallback = customIcon,
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                         modifier = Modifier.size(28.dp)

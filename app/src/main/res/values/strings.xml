@@ -453,4 +453,14 @@
     <string name="ui_digits">Digits (0-9)</string>
     <string name="ui_symbols">Symbols (!@#$...)</string>
     <string name="ui_date_format">MMM dd, yyyy \'at\' hh:mm a</string>
+    <string name="custom_icon_import_one">Import image</string>
+    <string name="custom_icon_import_many">Import multiple</string>
+    <string name="custom_icons_section">Your imported icons</string>
+    <string name="custom_icons_imported">Imported %1$d icon(s)</string>
+    <string name="custom_icons_import_partial">Imported %1$d of %2$d images</string>
+    <string name="custom_icon_remove_title">Remove custom icon?</string>
+    <string name="custom_icon_remove_message">Records using this image will show their default icon after removal.</string>
+    <string name="custom_icon_remove">Remove</string>
+    <string name="custom_icon_removed">Custom icon removed</string>
+    <string name="custom_icon_selected">Imported image</string>
 </resources>

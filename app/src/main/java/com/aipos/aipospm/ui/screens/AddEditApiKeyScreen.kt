@@ -41,6 +41,8 @@ import androidx.compose.material.icons.filled.VpnKey
 import androidx.compose.material3.rememberModalBottomSheetState
 import com.aipos.aipospm.ui.components.IconPickerBottomSheet
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.CustomIconStorage
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -262,8 +264,9 @@ fun AddEditApiKeyScreen(
                             .background(MaterialTheme.colorScheme.secondaryContainer),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(
-                            imageVector = selectedIcon,
+                        VaultIconDisplay(
+                            iconId = iconId,
+                            fallback = selectedIcon,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSecondaryContainer,
                             modifier = Modifier.size(24.dp)
@@ -279,7 +282,8 @@ fun AddEditApiKeyScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = VaultIconRegistry.getIconItem(iconId)?.let { stringResource(it.labelRes) } ?: stringResource(R.string.ui_default_key_a94571),
+                            text = if (CustomIconStorage.isCustomIcon(iconId)) stringResource(R.string.custom_icon_selected)
+                            else VaultIconRegistry.getIconItem(iconId)?.let { stringResource(it.labelRes) } ?: stringResource(R.string.ui_default_key_a94571),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onSurface

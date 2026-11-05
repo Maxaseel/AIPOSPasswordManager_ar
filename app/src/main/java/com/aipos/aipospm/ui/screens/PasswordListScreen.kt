@@ -46,6 +46,8 @@ import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.CustomIconStorage
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import com.aipos.aipospm.ui.theme.WarningAmber
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -681,9 +683,10 @@ private fun PasswordCard(
                             }
                             else -> {
                                 val customIcon = VaultIconRegistry.getIcon(entry.icon)
-                                if (customIcon != null) {
-                                    Icon(
-                                        imageVector = customIcon,
+                                if (customIcon != null || CustomIconStorage.isCustomIcon(entry.icon)) {
+                                    VaultIconDisplay(
+                                        iconId = entry.icon,
+                                        fallback = customIcon,
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                         modifier = Modifier.size(22.dp)
@@ -807,22 +810,23 @@ private fun PasswordCard(
                     }
                 }
 
-                IconButton(onClick = onCopyUsername, modifier = Modifier.size(36.dp)) {
-                    Icon(
-                        imageVector = Icons.Default.ContentCopy,
-                        contentDescription = stringResource(R.string.txt_copy_username_872e64),
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.outline
-                    )
-                }
-
-                IconButton(onClick = onCopyPassword, modifier = Modifier.size(36.dp)) {
-                    Icon(
-                        imageVector = Icons.Default.ContentCopy,
-                        contentDescription = stringResource(R.string.txt_password_7cc239),
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.outline
-                    )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    IconButton(onClick = onCopyUsername, modifier = Modifier.size(28.dp)) {
+                        Icon(
+                            imageVector = Icons.Default.ContentCopy,
+                            contentDescription = stringResource(R.string.txt_copy_username_872e64),
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colorScheme.outline
+                        )
+                    }
+                    IconButton(onClick = onCopyPassword, modifier = Modifier.size(28.dp)) {
+                        Icon(
+                            imageVector = Icons.Default.ContentCopy,
+                            contentDescription = stringResource(R.string.txt_password_7cc239),
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colorScheme.outline
+                        )
+                    }
                 }
                 IconButton(onClick = onFavoriteClick, modifier = Modifier.size(36.dp)) {
                     Icon(

@@ -45,6 +45,7 @@ import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.VpnKey
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -825,8 +826,7 @@ private fun FavoriteItemCard(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val customIcon = VaultIconRegistry.getIcon(item.icon)
-            val icon = customIcon ?: if (item.isPassword) Icons.Default.Shield else Icons.Default.VpnKey
+            val fallbackIcon = if (item.isPassword) Icons.Default.Shield else Icons.Default.VpnKey
             val iconColor = if (item.isPassword) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
             val iconBg = iconColor.copy(alpha = 0.1f)
 
@@ -848,8 +848,9 @@ private fun FavoriteItemCard(
                     .background(iconBg),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = icon,
+                VaultIconDisplay(
+                    iconId = item.icon,
+                    fallback = fallbackIcon,
                     contentDescription = null,
                     tint = iconColor,
                     modifier = Modifier.size(20.dp)

@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.filled.VpnKey
 import androidx.activity.compose.BackHandler
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -217,9 +218,9 @@ fun ApiKeyDetailScreen(
                             .padding(20.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        val iconVector = VaultIconRegistry.getIcon(entry.icon) ?: Icons.Default.VpnKey
-                        Icon(
-                            imageVector = iconVector,
+                        VaultIconDisplay(
+                            iconId = entry.icon,
+                            fallback = Icons.Default.VpnKey,
                             contentDescription = null,
                             modifier = Modifier.size(32.dp),
                             tint = MaterialTheme.colorScheme.onSecondaryContainer

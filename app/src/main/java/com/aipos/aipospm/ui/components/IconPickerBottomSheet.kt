@@ -2,6 +2,9 @@ package com.aipos.aipospm.ui.components
 
 import com.aipos.aipospm.R
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,6 +19,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -26,20 +31,27 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +62,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,6 +78,33 @@ fun IconPickerBottomSheet(
     onDismissRequest: () -> Unit
 ) {
     var selectedCategory by remember { mutableStateOf(VaultIconCategory.ALL) }
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var customIcons by remember { mutableStateOf(CustomIconStorage.list(context)) }
+    var importFeedback by remember { mutableStateOf<String?>(null) }
+    var iconPendingDelete by remember { mutableStateOf<StoredVaultIcon?>(null) }
+
+    val importUris: (List<Uri>) -> Unit = { uris ->
+        if (uris.isNotEmpty()) {
+            scope.launch {
+                val imported = withContext(Dispatchers.IO) {
+                    uris.mapNotNull { uri -> runCatching { CustomIconStorage.import(context, uri) }.getOrNull() }
+                }
+                customIcons = withContext(Dispatchers.IO) { CustomIconStorage.list(context) }
+                importFeedback = if (imported.size == uris.size) {
+                    context.getString(R.string.custom_icons_imported, imported.size)
+                } else {
+                    context.getString(R.string.custom_icons_import_partial, imported.size, uris.size)
+                }
+            }
+        }
+    }
+    val singleImagePicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri?.let { importUris(listOf(it)) }
+    }
+    val multipleImagePicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
+        importUris(uris)
+    }
 
     val filteredIcons = remember(selectedCategory) {
         if (selectedCategory == VaultIconCategory.ALL) {
@@ -69,6 +112,28 @@ fun IconPickerBottomSheet(
         } else {
             VaultIconRegistry.ALL_ICONS.filter { it.category == selectedCategory }
         }
+    }
+
+    iconPendingDelete?.let { icon ->
+        AlertDialog(
+            onDismissRequest = { iconPendingDelete = null },
+            title = { Text(stringResource(R.string.custom_icon_remove_title)) },
+            text = { Text(stringResource(R.string.custom_icon_remove_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    CustomIconStorage.delete(context, icon.id)
+                    customIcons = CustomIconStorage.list(context)
+                    if (currentIconId == icon.id) onIconSelected(null)
+                    importFeedback = context.getString(R.string.custom_icon_removed)
+                    iconPendingDelete = null
+                }) { Text(stringResource(R.string.custom_icon_remove)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { iconPendingDelete = null }) {
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
+                }
+            }
+        )
     }
 
     ModalBottomSheet(
@@ -80,6 +145,7 @@ fun IconPickerBottomSheet(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 32.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             // Header
             Row(
@@ -106,6 +172,36 @@ fun IconPickerBottomSheet(
 
             Spacer(modifier = Modifier.height(12.dp))
 
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                OutlinedButton(
+                    onClick = { singleImagePicker.launch(arrayOf("image/*")) },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text(stringResource(R.string.custom_icon_import_one), maxLines = 1)
+                }
+                OutlinedButton(
+                    onClick = { multipleImagePicker.launch(arrayOf("image/*")) },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text(stringResource(R.string.custom_icon_import_many), maxLines = 1)
+                }
+            }
+            importFeedback?.let { message ->
+                Text(
+                    text = message,
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 6.dp),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
             // Category filter chips
             LazyRow(
                 modifier = Modifier
@@ -127,6 +223,73 @@ fun IconPickerBottomSheet(
             }
 
             Spacer(modifier = Modifier.height(12.dp))
+
+            if (customIcons.isNotEmpty()) {
+                Text(
+                    text = stringResource(R.string.custom_icons_section),
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                LazyRow(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(customIcons, key = { it.id }) { item ->
+                        val isSelected = currentIconId == item.id
+                        Card(
+                            modifier = Modifier.size(width = 92.dp, height = 86.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .clickable {
+                                    onIconSelected(item.id)
+                                    onDismissRequest()
+                                },
+                            shape = RoundedCornerShape(12.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer
+                                else MaterialTheme.colorScheme.surfaceContainer
+                            ),
+                            border = if (isSelected) BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary) else null
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 6.dp, vertical = 4.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End
+                                ) {
+                                    IconButton(
+                                        onClick = { iconPendingDelete = item },
+                                        modifier = Modifier.size(24.dp)
+                                    ) {
+                                        Icon(
+                                            Icons.Default.Delete,
+                                            contentDescription = stringResource(R.string.custom_icon_remove),
+                                            modifier = Modifier.size(16.dp),
+                                            tint = MaterialTheme.colorScheme.error
+                                        )
+                                    }
+                                }
+                                VaultIconDisplay(
+                                    iconId = item.id,
+                                    modifier = Modifier.size(30.dp),
+                                    contentDescription = item.label
+                                )
+                                Text(
+                                    text = item.label,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+            }
 
             // Default / Reset Card
             Row(

@@ -47,6 +47,7 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import com.aipos.aipospm.data.SortOption
 import com.aipos.aipospm.ui.components.SortBottomSheet
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import com.aipos.aipospm.ui.components.VaultSectionHeader
 import androidx.compose.material.icons.filled.VpnKey
 import androidx.compose.material3.Card
@@ -520,9 +521,9 @@ private fun ApiKeyCard(
                         modifier = Modifier.size(44.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        val iconVector = VaultIconRegistry.getIcon(entry.icon) ?: Icons.Default.VpnKey
-                        Icon(
-                            imageVector = iconVector,
+                        VaultIconDisplay(
+                            iconId = entry.icon,
+                            fallback = Icons.Default.VpnKey,
                             contentDescription = null,
                             modifier = Modifier.size(22.dp),
                             tint = MaterialTheme.colorScheme.onSecondaryContainer
@@ -569,21 +570,23 @@ private fun ApiKeyCard(
                     }
                 }
 
-                IconButton(onClick = onCopyName, modifier = Modifier.size(36.dp)) {
-                    Icon(
-                        imageVector = Icons.Default.ContentCopy,
-                        contentDescription = stringResource(R.string.txt_copy_af74f7),
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.outline
-                    )
-                }
-                IconButton(onClick = onCopyKey, modifier = Modifier.size(36.dp)) {
-                    Icon(
-                        imageVector = Icons.Default.ContentCopy,
-                        contentDescription = stringResource(R.string.ui_api_key_47acd2),
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.outline
-                    )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    IconButton(onClick = onCopyName, modifier = Modifier.size(28.dp)) {
+                        Icon(
+                            imageVector = Icons.Default.ContentCopy,
+                            contentDescription = stringResource(R.string.txt_copy_af74f7),
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colorScheme.outline
+                        )
+                    }
+                    IconButton(onClick = onCopyKey, modifier = Modifier.size(28.dp)) {
+                        Icon(
+                            imageVector = Icons.Default.ContentCopy,
+                            contentDescription = stringResource(R.string.ui_api_key_47acd2),
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colorScheme.outline
+                        )
+                    }
                 }
                 IconButton(onClick = onFavoriteClick, modifier = Modifier.size(36.dp)) {
                     Icon(

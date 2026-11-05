@@ -46,6 +46,8 @@ import androidx.compose.material.icons.filled.Password
 import androidx.compose.material3.rememberModalBottomSheetState
 import com.aipos.aipospm.ui.components.IconPickerBottomSheet
 import com.aipos.aipospm.ui.components.VaultIconRegistry
+import com.aipos.aipospm.ui.components.CustomIconStorage
+import com.aipos.aipospm.ui.components.VaultIconDisplay
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Warning
@@ -328,8 +330,8 @@ fun AddEditPasswordScreen(
                         .fillMaxWidth()
                         .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically
-                ) {
-                    val selectedIcon = VaultIconRegistry.getIcon(iconId)
+                    ) {
+                        val selectedIcon = VaultIconRegistry.getIcon(iconId)
                     Box(
                         modifier = Modifier
                             .size(48.dp)
@@ -337,7 +339,13 @@ fun AddEditPasswordScreen(
                             .background(MaterialTheme.colorScheme.primaryContainer),
                         contentAlignment = Alignment.Center
                     ) {
-                        if (selectedIcon != null) {
+                        if (CustomIconStorage.isCustomIcon(iconId)) {
+                            VaultIconDisplay(
+                                iconId = iconId,
+                                modifier = Modifier.size(24.dp),
+                                contentDescription = null
+                            )
+                        } else if (selectedIcon != null) {
                             Icon(
                                 imageVector = selectedIcon,
                                 contentDescription = null,
@@ -370,7 +378,8 @@ fun AddEditPasswordScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = VaultIconRegistry.getIconItem(iconId)?.let { stringResource(it.labelRes) } ?: stringResource(R.string.ui_default_auto_first_letter_ad3ec0),
+                            text = if (CustomIconStorage.isCustomIcon(iconId)) stringResource(R.string.custom_icon_selected)
+                            else VaultIconRegistry.getIconItem(iconId)?.let { stringResource(it.labelRes) } ?: stringResource(R.string.ui_default_auto_first_letter_ad3ec0),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onSurface
