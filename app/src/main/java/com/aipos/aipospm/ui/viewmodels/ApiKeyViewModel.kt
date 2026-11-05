@@ -258,11 +258,6 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun decryptApiKey(entry: ApiKeyEntry): String = try {
-        cryptoManager.decrypt(entry.encryptedApiKey, entry.iv)
-    } catch (e: Exception) {
-        "*** Decryption failed ***"
-    }
     private var loadJob: kotlinx.coroutines.Job? = null
 
     fun loadApiKey(id: Int) {
