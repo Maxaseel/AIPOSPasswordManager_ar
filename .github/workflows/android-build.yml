@@ -28,16 +28,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install Android API 37 SDK
-        run: sdkmanager 'platforms;android-37.0' 'build-tools;37.0.0' 'platform-tools'
+        shell: bash
+        run: |
+          sdkmanager_path="$(find "${ANDROID_HOME}/cmdline-tools" -type f -name sdkmanager | sort | tail -n 1)"
+          if [[ -z "${sdkmanager_path}" ]]; then
+            echo "sdkmanager not found under ${ANDROID_HOME}/cmdline-tools" >&2
+            exit 1
+          fi
+          yes | "${sdkmanager_path}" --licenses >/dev/null
+          "${sdkmanager_path}" --install 'platforms;android-37.0' 'build-tools;37.0.0' 'platform-tools'
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
