@@ -63,13 +63,13 @@ class CustomIconSupportTest {
         assertTrue("Should have multiple icon categories", categories.size >= 4)
 
         for (category in categories) {
-            assertTrue("Category display name must not be empty", category.displayName.isNotBlank())
+            assertTrue("Category display name resource must be valid", category.displayNameRes != 0)
         }
 
         // Verify that every category (except ALL) has mapped icons
         for (category in categories.filter { it != VaultIconCategory.ALL }) {
             val iconsForCat = VaultIconRegistry.ALL_ICONS.filter { it.category == category }
-            assertTrue("Category ${category.displayName} should contain icons", iconsForCat.isNotEmpty())
+            assertTrue("Category ${category.name} should contain icons", iconsForCat.isNotEmpty())
         }
     }
 
