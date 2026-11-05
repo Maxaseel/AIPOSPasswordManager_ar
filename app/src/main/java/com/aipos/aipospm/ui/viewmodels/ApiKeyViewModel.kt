@@ -253,7 +253,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
                 }
                 _uiState.value = _uiState.value.copy(saveSuccess = true, error = null)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to save: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_save, e.message.orEmpty()))
             }
         }
     }
@@ -296,7 +296,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
             try {
                 apiKeyDao.restoreApiKeyById(id)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to restore: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_restore, e.message.orEmpty()))
             }
         }
     }
@@ -318,7 +318,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
             try {
                 apiKeyDao.softDeleteApiKey(id)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to delete: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_delete, e.message.orEmpty()))
             }
         }
     }
@@ -328,7 +328,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
             try {
                 apiKeyDao.permanentlyDeleteApiKey(id)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to permanently delete: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_permanent_delete, e.message.orEmpty()))
             }
         }
     }
@@ -338,7 +338,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
             try {
                 apiKeyDao.emptyApiKeyTrash()
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to empty trash: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_empty_trash, e.message.orEmpty()))
             }
         }
     }

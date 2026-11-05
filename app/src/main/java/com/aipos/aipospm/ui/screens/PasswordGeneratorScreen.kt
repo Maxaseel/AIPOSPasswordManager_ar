@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -64,6 +66,7 @@ import com.aipos.aipospm.ui.viewmodels.PasswordGeneratorViewModel
 import com.aipos.aipospm.ui.viewmodels.PasswordStrength
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,10 +106,10 @@ fun PasswordGeneratorScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Password Generator", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_password_generator_00cac0), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -166,9 +169,9 @@ fun PasswordGeneratorScreen(
                     Text(
                         text = when (uiState.strength) {
                             PasswordStrength.NONE -> ""
-                            PasswordStrength.WEAK -> "Weak"
-                            PasswordStrength.MEDIUM -> "Medium"
-                            PasswordStrength.STRONG -> "Strong"
+                            PasswordStrength.WEAK -> stringResource(R.string.state_weak)
+                            PasswordStrength.MEDIUM -> stringResource(R.string.state_medium)
+                            PasswordStrength.STRONG -> stringResource(R.string.state_strong)
                         },
                         style = MaterialTheme.typography.labelSmall,
                         color = strengthColor
@@ -185,9 +188,9 @@ fun PasswordGeneratorScreen(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 generatorViewModel.recordCurrentPasswordInHistory()
-                                ClipboardHelper.copyAndScheduleClear(context, "Generated Password", uiState.generatedPassword)
+                                ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_generated_password), uiState.generatedPassword)
                                 scope.launch {
-                                    snackbarHostState.showSnackbar("Password copied (clears in 30s)")
+                                    snackbarHostState.showSnackbar(context.getString(R.string.ui_password_copied_clears_in_30s_741f7c))
                                 }
                             },
                             modifier = Modifier.weight(1f),
@@ -195,11 +198,11 @@ fun PasswordGeneratorScreen(
                         ) {
                             Icon(
                                 Icons.Default.ContentCopy,
-                                contentDescription = "Copy",
+                                contentDescription = stringResource(R.string.txt_copy_af74f7),
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Copy")
+                            Text(stringResource(R.string.txt_copy_af74f7))
                         }
 
                         FilledTonalButton(
@@ -213,11 +216,11 @@ fun PasswordGeneratorScreen(
                         ) {
                             Icon(
                                 Icons.Default.Casino,
-                                contentDescription = "Regenerate",
+                                contentDescription = stringResource(R.string.txt_regenerate_b04c99),
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Regenerate")
+                            Text(stringResource(R.string.txt_regenerate_b04c99))
                         }
                     }
 
@@ -238,7 +241,7 @@ fun PasswordGeneratorScreen(
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Use This Password", fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.txt_use_this_password_5c8797), fontWeight = FontWeight.SemiBold)
                         }
                     }
                 }
@@ -261,12 +264,12 @@ fun PasswordGeneratorScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Length",
+                            text = stringResource(R.string.ui_length_3bade3),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "${uiState.length} characters",
+                            text = stringResource(R.string.ui_characters_ba989f, uiState.length),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.SemiBold
@@ -283,8 +286,8 @@ fun PasswordGeneratorScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("8", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
-                        Text("64", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
+                        Text(stringResource(R.string.txt_8_fe5dbb), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
+                        Text(stringResource(R.string.txt_64_c66c65), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
                     }
                 }
             }
@@ -301,29 +304,29 @@ fun PasswordGeneratorScreen(
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(
-                        text = "Character Types",
+                        text = stringResource(R.string.ui_character_types_86006d),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
                     ToggleRow(
-                        label = "Uppercase (A-Z)",
+                        label = stringResource(R.string.ui_uppercase),
                         checked = uiState.useUppercase,
                         onCheckedChange = { generatorViewModel.toggleUppercase(it) }
                     )
                     ToggleRow(
-                        label = "Lowercase (a-z)",
+                        label = stringResource(R.string.ui_lowercase),
                         checked = uiState.useLowercase,
                         onCheckedChange = { generatorViewModel.toggleLowercase(it) }
                     )
                     ToggleRow(
-                        label = "Digits (0-9)",
+                        label = stringResource(R.string.ui_digits),
                         checked = uiState.useDigits,
                         onCheckedChange = { generatorViewModel.toggleDigits(it) }
                     )
                     ToggleRow(
-                        label = "Symbols (!@#\$%...)",
+                        label = stringResource(R.string.ui_symbols),
                         checked = uiState.useSymbols,
                         onCheckedChange = { generatorViewModel.toggleSymbols(it) }
                     )
@@ -341,7 +344,7 @@ fun PasswordGeneratorScreen(
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Text(
-                            text = "History",
+                            text = stringResource(R.string.ui_history_90ccd6),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Medium
                         )
@@ -364,16 +367,16 @@ fun PasswordGeneratorScreen(
                                 IconButton(
                                     onClick = {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        ClipboardHelper.copyAndScheduleClear(context, "Generated Password", hist)
+                                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_generated_password), hist)
                                         scope.launch {
-                                            snackbarHostState.showSnackbar("Password copied (clears in 30s)")
+                                            snackbarHostState.showSnackbar(context.getString(R.string.ui_password_copied_clears_in_30s_741f7c))
                                         }
                                     },
                                     modifier = Modifier.size(36.dp)
                                 ) {
                                     Icon(
                                         Icons.Default.ContentCopy,
-                                        contentDescription = "Copy from history",
+                                        contentDescription = stringResource(R.string.txt_copy_from_history_8e8b7d),
                                         modifier = Modifier.size(18.dp),
                                         tint = MaterialTheme.colorScheme.outline
                                     )

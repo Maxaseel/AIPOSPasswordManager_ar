@@ -14,7 +14,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:src="@drawable/ic_autofill_key"
-        android:contentDescription="AIPOS Key" />
+        android:contentDescription="@string/txt_aipos_key_ec2573" />
 
     <LinearLayout
         android:layout_width="0dp"

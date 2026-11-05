@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.components
 
+import com.aipos.aipospm.R
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -47,6 +49,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,13 +91,13 @@ fun IconPickerBottomSheet(
             ) {
                 Column {
                     Text(
-                        text = "Choose Custom Icon",
+                        text = stringResource(R.string.ui_choose_custom_icon_8bc9a6),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = "Select an icon to easily identify this item at a glance",
+                        text = stringResource(R.string.ui_select_an_icon_to_easily_identify_th_20ad04),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -114,7 +117,7 @@ fun IconPickerBottomSheet(
                     FilterChip(
                         selected = selectedCategory == category,
                         onClick = { selectedCategory = category },
-                        label = { Text(category.displayName) },
+                        label = { Text(stringResource(category.displayNameRes)) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                             selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -196,7 +199,7 @@ fun IconPickerBottomSheet(
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "Use default system display",
+                                text = stringResource(R.string.ui_use_default_system_display_9ceb7d),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -205,7 +208,7 @@ fun IconPickerBottomSheet(
                         if (isDefaultSelected) {
                             Icon(
                                 imageVector = Icons.Default.Check,
-                                contentDescription = "Selected",
+                                contentDescription = stringResource(R.string.txt_selected_9a976f),
                                 tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(20.dp)
                             )
@@ -265,7 +268,7 @@ fun IconPickerBottomSheet(
                             ) {
                                 Icon(
                                     imageVector = item.icon,
-                                    contentDescription = item.label,
+                                    contentDescription = stringResource(item.labelRes),
                                     tint = if (isSelected) MaterialTheme.colorScheme.primary
                                     else MaterialTheme.colorScheme.onSurface,
                                     modifier = Modifier.size(22.dp)
@@ -273,7 +276,7 @@ fun IconPickerBottomSheet(
                             }
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
-                                text = item.label,
+                                text = stringResource(item.labelRes),
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                                 color = if (isSelected) MaterialTheme.colorScheme.primary

@@ -416,7 +416,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
                 }
                 _uiState.value = _uiState.value.copy(saveSuccess = true, error = null)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to save: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_save, e.message.orEmpty()))
             }
         }
     }
@@ -502,12 +502,12 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
                             writer.write(encryptedBackup)
                             writer.flush()
                         }
-                    } ?: throw IllegalStateException("Could not open output stream for the selected file.")
+                    } ?: throw IllegalStateException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_open_output_stream))
                 }
 
                 onSuccess()
             } catch (e: Exception) {
-                onError(e.message ?: "Unknown error during export")
+                onError(e.message ?: getApplication<Application>().getString(com.aipos.aipospm.R.string.error_unknown_export))
             }
         }
     }
@@ -525,26 +525,26 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
                     val contentResolver = getApplication<Application>().contentResolver
                     val backupJson = contentResolver.openInputStream(uri)?.use { stream ->
                         stream.bufferedReader(Charsets.UTF_8).readText()
-                    } ?: throw IllegalStateException("Could not open the selected backup file.")
+                    } ?: throw IllegalStateException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_open_backup))
 
                     if (backupJson.isBlank()) {
-                        throw IllegalArgumentException("Backup file is empty or unreadable.")
+                        throw IllegalArgumentException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_backup_empty))
                     }
 
                     val decryptedJson = try {
                         BackupManager().decryptBackup(backupJson, password)
                     } catch (e: Exception) {
-                        throw IllegalArgumentException("Wrong backup password or corrupted backup file.")
+                        throw IllegalArgumentException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_wrong_backup_password))
                     }
 
                     val parsed = try {
                         com.google.gson.Gson().fromJson(decryptedJson, BackupPayload::class.java)
                     } catch (e: Exception) {
-                        throw IllegalArgumentException("Invalid backup file format.")
+                        throw IllegalArgumentException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_backup_format))
                     }
 
                     if (parsed == null || (parsed.version != null && parsed.version !in 1..10)) {
-                        throw IllegalArgumentException("Unsupported or corrupt backup version.")
+                        throw IllegalArgumentException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_backup_version))
                     }
                     parsed
                 }
@@ -628,7 +628,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
                 clearDecryptionCache()
                 onSuccess()
             } catch (e: Exception) {
-                onError(e.message ?: "Failed to decrypt or restore backup")
+                onError(e.message ?: getApplication<Application>().getString(com.aipos.aipospm.R.string.error_decrypt_restore))
             }
         }
     }
@@ -645,11 +645,11 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
                     contentResolver.openInputStream(uri)?.use { stream ->
                         val parsed = com.aipos.aipospm.security.CsvParser.parse(stream)
                         com.aipos.aipospm.security.CsvImportMapper.map(parsed)
-                    } ?: throw IllegalStateException("Could not open the selected CSV file.")
+                    } ?: throw IllegalStateException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_open_csv))
                 }
 
                 if (importEntries.isEmpty()) {
-                    throw IllegalArgumentException("No valid credentials found in the CSV file.")
+                    throw IllegalArgumentException(getApplication<Application>().getString(com.aipos.aipospm.R.string.error_csv_no_credentials))
                 }
 
                 data class EncryptedImportEntry(
@@ -732,7 +732,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
                 clearDecryptionCache()
                 onSuccess(importEntries.size)
             } catch (e: Exception) {
-                onError(e.message ?: "Failed to import CSV")
+                onError(e.message ?: getApplication<Application>().getString(com.aipos.aipospm.R.string.error_import_csv))
             }
         }
     }
@@ -782,7 +782,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
             try {
                 passwordDao.restorePasswordById(id)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to restore: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_restore, e.message.orEmpty()))
             }
         }
     }
@@ -810,7 +810,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
             try {
                 passwordDao.softDeletePassword(id)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to delete: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_delete, e.message.orEmpty()))
             }
         }
     }
@@ -820,7 +820,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
             try {
                 passwordDao.permanentlyDeletePassword(id)
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to permanently delete: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_permanent_delete, e.message.orEmpty()))
             }
         }
     }
@@ -830,7 +830,7 @@ class PasswordViewModel(application: Application) : AndroidViewModel(application
             try {
                 passwordDao.emptyPasswordTrash()
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(error = "Failed to empty trash: ${e.message}")
+                _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_failed_empty_trash, e.message.orEmpty()))
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import android.content.ClipData
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -94,6 +96,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import com.aipos.aipospm.ui.components.bounceClick
 import com.aipos.aipospm.ui.components.pressScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -124,12 +127,12 @@ fun HomeScreen(
     // Dynamic top bar title per tab
     val topBarTitle = when (selectedTab) {
         1 -> "Passwords"
-        2 -> "API Keys"
+        2 -> stringResource(R.string.ui_api_keys_e18ffc)
         else -> "AIPOS"
     }
 
     val topBarSubtitle = when (selectedTab) {
-        0 -> "Password Manager"
+        0 -> stringResource(R.string.ui_password_manager)
         else -> null
     }
 
@@ -155,7 +158,7 @@ fun HomeScreen(
                 },
                 actions = {
                     IconButton(onClick = onNavigateToSettings) {
-                        Icon(Icons.Default.Settings, contentDescription = "Settings")
+                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.txt_settings_c7f73b))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -170,8 +173,8 @@ fun HomeScreen(
                 NavigationBarItem(
                     selected = selectedTab == 0,
                     onClick = { selectedTab = 0 },
-                    icon = { Icon(Icons.Default.Shield, contentDescription = "Home") },
-                    label = { Text("Home") }
+                    icon = { Icon(Icons.Default.Shield, contentDescription = stringResource(R.string.txt_home_70f8bb)) },
+                    label = { Text(stringResource(R.string.txt_home_70f8bb)) }
                 )
                 NavigationBarItem(
                     selected = selectedTab == 1,
@@ -180,14 +183,14 @@ fun HomeScreen(
                         passwordViewModel.setShowReusedOnlyFilter(false)
                         selectedTab = 1
                     },
-                    icon = { Icon(Icons.Default.Password, contentDescription = "Passwords") },
-                    label = { Text("Passwords") }
+                    icon = { Icon(Icons.Default.Password, contentDescription = stringResource(R.string.txt_passwords_02c830)) },
+                    label = { Text(stringResource(R.string.txt_passwords_02c830)) }
                 )
                 NavigationBarItem(
                     selected = selectedTab == 2,
                     onClick = { selectedTab = 2 },
-                    icon = { Icon(Icons.Default.VpnKey, contentDescription = "API Keys") },
-                    label = { Text("API Keys") }
+                    icon = { Icon(Icons.Default.VpnKey, contentDescription = stringResource(R.string.txt_api_keys_e18ffc)) },
+                    label = { Text(stringResource(R.string.txt_api_keys_e18ffc)) }
                 )
             }
         },
@@ -203,9 +206,9 @@ fun HomeScreen(
                         shape = RoundedCornerShape(16.dp),
                         modifier = Modifier.pressScale(interactionSource)
                     ) {
-                        Icon(Icons.Default.Add, contentDescription = "Add")
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.txt_add_61cc55))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Add New")
+                        Text(stringResource(R.string.txt_add_new_07c4aa))
                     }
                 }
                 1 -> {
@@ -218,7 +221,7 @@ fun HomeScreen(
                         shape = RoundedCornerShape(16.dp),
                         modifier = Modifier.pressScale(interactionSource)
                     ) {
-                        Icon(Icons.Default.Add, contentDescription = "Add Password")
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.txt_add_password_6e19a6))
                     }
                 }
                 2 -> {
@@ -231,7 +234,7 @@ fun HomeScreen(
                         shape = RoundedCornerShape(16.dp),
                         modifier = Modifier.pressScale(interactionSource)
                     ) {
-                        Icon(Icons.Default.Add, contentDescription = "Add API Key")
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.txt_add_api_key_14b400))
                     }
                 }
             }
@@ -271,16 +274,16 @@ fun HomeScreen(
                     onNavigateToAddPassword = onNavigateToAddPassword,
                     onNavigateToAddApiKey = onNavigateToAddApiKey,
                     onCopyUsername = { entry ->
-                        ClipboardHelper.copyAndScheduleClear(context, "Username", entry.username)
+                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_username), entry.username)
                         scope.launch {
-                            snackbarHostState.showSnackbar("Username copied (clears in 30s)")
+                            snackbarHostState.showSnackbar(context.getString(R.string.ui_username_copied_clears_in_30s_8461b7))
                         }
                     },
                     onCopyApiKey = { entry ->
                         val decrypted = apiKeyViewModel.decryptApiKey(entry)
-                        ClipboardHelper.copyAndScheduleClear(context, "API Key", decrypted)
+                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_api_key_47acd2), decrypted)
                         scope.launch {
-                            snackbarHostState.showSnackbar("API Key copied (clears in 30s)")
+                            snackbarHostState.showSnackbar(context.getString(R.string.ui_api_key_copied_clears_in_30s_48a4a4))
                         }
                     },
                     modifier = Modifier.padding(padding)
@@ -334,17 +337,17 @@ private fun DashboardContent(
     val isReused = reusedPasswordCount > 0
 
     val statusTitle = when {
-        totalEntries == 0 -> "Welcome to AIPOS"
-        isCompromised -> "Action Required"
-        isReused -> "Review Recommended"
-        else -> "Vault Protected"
+        totalEntries == 0 -> stringResource(R.string.home_welcome)
+        isCompromised -> stringResource(R.string.home_action_required)
+        isReused -> stringResource(R.string.home_review_recommended)
+        else -> stringResource(R.string.home_vault_protected)
     }
 
     val statusDesc = when {
-        totalEntries == 0 -> "Your credentials vault is empty. Tap to add your first entry."
-        isCompromised -> "$breachedPasswordCount weak or compromised passwords detected. Review them immediately."
-        isReused -> "$reusedPasswordCount reused passwords detected across your accounts."
-        else -> "All local credentials and API keys are fully encrypted and secure."
+        totalEntries == 0 -> stringResource(R.string.home_empty_desc)
+        isCompromised -> stringResource(R.string.home_compromised_desc, breachedPasswordCount)
+        isReused -> stringResource(R.string.home_reused_desc, reusedPasswordCount)
+        else -> stringResource(R.string.home_secure_desc)
     }
 
     val ringColor = when {
@@ -473,7 +476,7 @@ private fun DashboardContent(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     SummaryCard(
-                        title = "Passwords",
+                        title = stringResource(R.string.ui_passwords_02c830),
                         count = passwordCount,
                         icon = Icons.Default.Password,
                         containerColor = MaterialTheme.colorScheme.primary,
@@ -482,7 +485,7 @@ private fun DashboardContent(
                         modifier = Modifier.weight(1f)
                     )
                     SummaryCard(
-                        title = "API Keys",
+                        title = stringResource(R.string.ui_api_keys_e18ffc),
                         count = apiKeyCount,
                         icon = Icons.Default.VpnKey,
                         containerColor = MaterialTheme.colorScheme.secondary,
@@ -533,13 +536,13 @@ private fun DashboardContent(
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "Password Generator",
+                                text = stringResource(R.string.ui_password_generator_00cac0),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "Create strong, random passwords locally",
+                                text = stringResource(R.string.ui_create_strong_random_passwords_local_0de268),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -570,7 +573,7 @@ private fun DashboardContent(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Favorites (${favoritesList.size})",
+                        text = stringResource(R.string.ui_favorites_dc8f67, favoritesList.size),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -638,14 +641,14 @@ private fun DashboardContent(
                             }
                             Spacer(modifier = Modifier.height(20.dp))
                             Text(
-                                text = "Your vault is ready!",
+                                text = stringResource(R.string.ui_your_vault_is_ready_f22c5d),
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = "Start by adding your first credential.\nEverything stays encrypted and offline.",
+                                text = stringResource(R.string.ui_start_by_adding_your_first_credentia_628b18),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
@@ -702,13 +705,13 @@ fun VaultScoreRing(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = if (totalEntries == 0) "-" else "$score",
+                text = if (totalEntries == 0) "-" else stringResource(R.string.ui_message_37a23c, score),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = if (totalEntries == 0) MaterialTheme.colorScheme.onSurfaceVariant else color
             )
             Text(
-                text = "Score",
+                text = stringResource(R.string.ui_score_489f48),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                 fontWeight = FontWeight.Medium
@@ -772,7 +775,7 @@ private fun SummaryCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Add $title",
+                        contentDescription = stringResource(R.string.txt_add_named, title),
                         modifier = Modifier.size(16.dp),
                         tint = containerColor
                     )
@@ -875,7 +878,7 @@ private fun FavoriteItemCard(
             IconButton(onClick = onCopy) {
                 Icon(
                     imageVector = Icons.Default.ContentCopy,
-                    contentDescription = "Copy",
+                    contentDescription = stringResource(R.string.txt_copy_af74f7),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                     modifier = Modifier.size(20.dp)
                 )
@@ -883,7 +886,7 @@ private fun FavoriteItemCard(
             
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = "View details",
+                contentDescription = stringResource(R.string.txt_view_details_badd38),
                 tint = MaterialTheme.colorScheme.outlineVariant,
                 modifier = Modifier.size(16.dp)
             )
@@ -909,7 +912,7 @@ sealed interface FavoriteItem {
     data class ApiKey(val entry: ApiKeyEntry) : FavoriteItem {
         override val id = entry.id
         override val title = entry.serviceName
-        override val subtitle = "API Key"
+        override val subtitle = stringResource(R.string.ui_api_key_47acd2)
         override val isPassword = false
         override val icon = entry.icon
     }

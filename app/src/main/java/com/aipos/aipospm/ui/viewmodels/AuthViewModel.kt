@@ -49,11 +49,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setupMasterPassword(password: String, confirmPassword: String): Boolean {
         if (password != confirmPassword) {
-            _uiState.value = _uiState.value.copy(error = "Passwords do not match")
+            _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_passwords_do_not_match))
             return false
         }
         if (password.length < 6) {
-            _uiState.value = _uiState.value.copy(error = "Password must be at least 6 characters")
+            _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_password_min_six))
             return false
         }
         masterPasswordManager.setMasterPassword(password)
@@ -67,14 +67,14 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun verifyMasterPassword(password: String): Boolean {
         if (password.isBlank()) {
-            _uiState.value = _uiState.value.copy(error = "Please enter your master password")
+            _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_enter_master_password))
             return false
         }
         val result = masterPasswordManager.verifyMasterPassword(password)
         _uiState.value = if (result) {
             _uiState.value.copy(isAuthenticated = true, error = null)
         } else {
-            _uiState.value.copy(error = "Incorrect password")
+            _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_incorrect_password))
         }
         return result
     }
@@ -90,18 +90,18 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun changeMasterPassword(oldPassword: String, newPassword: String, confirmNew: String): Boolean {
         if (newPassword != confirmNew) {
-            _uiState.value = _uiState.value.copy(error = "New passwords do not match")
+            _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_new_passwords_do_not_match))
             return false
         }
         if (newPassword.length < 6) {
-            _uiState.value = _uiState.value.copy(error = "Password must be at least 6 characters")
+            _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_password_min_six))
             return false
         }
         val result = masterPasswordManager.changeMasterPassword(oldPassword, newPassword)
         _uiState.value = if (result) {
             _uiState.value.copy(error = null)
         } else {
-            _uiState.value.copy(error = "Current password is incorrect")
+            _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_current_password_incorrect))
         }
         return result
     }
@@ -157,7 +157,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun resetMasterPasswordWithRecoveryKey(key: String, newPw: String): Boolean {
         if (newPw.length < 6) {
-            _uiState.value = _uiState.value.copy(error = "Password must be at least 6 characters")
+            _uiState.value = _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_password_min_six))
             return false
         }
         val success = masterPasswordManager.resetMasterPasswordWithRecoveryKey(key, newPw)
@@ -168,7 +168,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 error = null
             )
         } else {
-            _uiState.value.copy(error = "Invalid recovery key")
+            _uiState.value.copy(error = getApplication<Application>().getString(com.aipos.aipospm.R.string.error_invalid_recovery_key))
         }
         return success
     }
