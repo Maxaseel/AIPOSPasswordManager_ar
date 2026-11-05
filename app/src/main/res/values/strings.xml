@@ -114,8 +114,8 @@
     <string name="txt_search_aipos_198ddb">Search AIPOS</string>
     <string name="txt_search_aipos_vault_c6b390">Search AIPOS Vault...</string>
     <string name="txt_unlock_and_pick_another_account_31eb2e">Unlock and pick another account</string>
-    <string name="txt_trash_confirm_item">Are you sure you want to permanently delete '%1$s'? This cannot be recovered.</string>
-    <string name="txt_trash_confirm_api_item">Are you sure you want to permanently delete '%1$s'? This cannot be recovered.</string>
+    <string name="txt_trash_confirm_item">Are you sure you want to permanently delete \'%1$s\'? This cannot be recovered.</string>
+    <string name="txt_trash_confirm_api_item">Are you sure you want to permanently delete \'%1$s\'? This cannot be recovered.</string>
     <string name="txt_move_item_to_trash">Are you sure you want to move "%1$s" to the Trash? You can restore it within 30 days.</string>
     <string name="txt_delete_category_confirm">Are you sure you want to delete the category "%1$s"? Passwords/Keys in this category will be kept, but set to uncategorized.</string>
     <string name="txt_category_named">Category: %1$s</string>
@@ -164,7 +164,7 @@
     <string name="ui_try_a_different_search_or_filter_90f2c1">Try a different search or filter</string>
     <string name="ui_favorites_07b3e4">Favorites</string>
     <string name="ui_all_api_keys_0f404f">All API Keys</string>
-    <string name="ui_api_key_deleted_ad046d">API key '%1$s' deleted</string>
+    <string name="ui_api_key_deleted_ad046d">API key \'%1$s\' deleted</string>
     <string name="ui_service_name_copied_clears_in_30s_a95b7e">Service name copied (clears in 30s)</string>
     <string name="ui_unlocked_b3da70">Unlocked</string>
     <string name="ui_locked_a79888">Locked</string>
@@ -203,7 +203,7 @@
     <string name="ui_history_90ccd6">History</string>
     <string name="ui_search_passwords_33d307">Search passwords...</string>
     <string name="ui_all_passwords_4e60d6">All Passwords</string>
-    <string name="ui_password_deleted_9dcca4">Password '%1$s' deleted</string>
+    <string name="ui_password_deleted_9dcca4">Password \'%1$s\' deleted</string>
     <string name="ui_compromised_acf32d">Compromised</string>
     <string name="ui_reused_103b12">Reused</string>
     <string name="ui_successfully_imported_entries_6cac85">Successfully imported %1$s entries</string>
@@ -264,8 +264,8 @@
     <string name="ui_items_in_trash_are_automatically_pur_a80a18">Items in trash are automatically purged after 30 days.</string>
     <string name="ui_passwords_6e6219">Passwords (%1$s)</string>
     <string name="ui_api_keys_13d1ca">API Keys (%1$s)</string>
-    <string name="ui_restored_6a488c">Restored '%1$s'</string>
-    <string name="ui_restored_54b383">Restored '%1$s'</string>
+    <string name="ui_restored_6a488c">Restored \'%1$s\'</string>
+    <string name="ui_restored_54b383">Restored \'%1$s\'</string>
     <string name="ui_d_left_0d1f73">%1$s d left</string>
     <string name="ui_no_deleted_f11300">No deleted %1$s</string>
     <string name="ui_deleted_entries_stay_here_for_30_day_898dc8">Deleted entries stay here for 30 days before being permanently removed.</string>
@@ -422,7 +422,7 @@
     <string name="state_strong">Strong</string>
     <string name="open_in_browser">Open in Browser</string>
     <string name="autofill_ready">AIPOS is ready to autofill passwords in apps &amp; browsers</string>
-    <string name="autofill_enable">Tap to enable AIPOS as your device's Autofill Provider</string>
+    <string name="autofill_enable">Tap to enable AIPOS as your device\'s Autofill Provider</string>
     <string name="auto_lock_one">1 Minute</string>
     <string name="auto_lock_five">5 Minutes</string>
     <string name="auto_lock_ten">10 Minutes</string>
@@ -452,5 +452,5 @@
     <string name="ui_lowercase">Lowercase (a-z)</string>
     <string name="ui_digits">Digits (0-9)</string>
     <string name="ui_symbols">Symbols (!@#$...)</string>
-    <string name="ui_date_format">MMM dd, yyyy 'at' hh:mm a</string>
+    <string name="ui_date_format">MMM dd, yyyy \'at\' hh:mm a</string>
 </resources>
