@@ -179,7 +179,7 @@ fun AuthScreen(
                     ) { success ->
                         Icon(
                             imageVector = if (success) Icons.Default.Shield else Icons.Default.Lock,
-                            contentDescription = if (success) "Unlocked" else "Locked",
+                            contentDescription = if (success) stringResource(R.string.ui_unlocked_b3da70) else stringResource(R.string.ui_locked_a79888),
                             modifier = Modifier.size(40.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
@@ -190,7 +190,7 @@ fun AuthScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "AIPOS Locked",
+                text = stringResource(R.string.ui_aipos_locked_ea3f04),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground
@@ -199,7 +199,7 @@ fun AuthScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Enter your master password to unlock",
+                text = stringResource(R.string.ui_enter_your_master_password_to_unlock_1c4bc3),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
@@ -232,7 +232,7 @@ fun AuthScreen(
                                 Icon(
                                     imageVector = if (passwordVisible) Icons.Default.VisibilityOff
                                     else Icons.Default.Visibility,
-                                    contentDescription = if (passwordVisible) "Hide" else "Show"
+                                    contentDescription = if (passwordVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e)
                                 )
                             }
                         },
@@ -265,7 +265,7 @@ fun AuthScreen(
                         )
                     ) {
                         Text(
-                            text = "Unlock",
+                            text = stringResource(R.string.ui_unlock_1526a1),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -288,7 +288,7 @@ fun AuthScreen(
                             )
                             Spacer(modifier = Modifier.padding(horizontal = 4.dp))
                             Text(
-                                text = "Use Biometric",
+                                text = stringResource(R.string.ui_use_biometric_5aaf50),
                                 style = MaterialTheme.typography.titleMedium
                             )
                         }
@@ -320,7 +320,7 @@ fun AuthScreen(
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "AES-256-GCM Encrypted  •  Offline Only",
+                    text = stringResource(R.string.ui_aes_256_gcm_encrypted_offline_only_dda413),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline,
                     textAlign = TextAlign.Center
@@ -343,7 +343,7 @@ fun AuthScreen(
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text(
-                        text = "Enter your offline emergency recovery key and a new master password to reset your credentials.",
+                        text = stringResource(R.string.ui_enter_your_offline_emergency_recover_c01906),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     OutlinedTextField(
@@ -406,11 +406,11 @@ fun AuthScreen(
                 TextButton(
                     onClick = {
                         if (newRecoveryPassword != confirmRecoveryPassword) {
-                            resetError = "Passwords do not match"
+                            resetError = context.getString(R.string.error_passwords_do_not_match)
                             return@TextButton
                         }
                         if (newRecoveryPassword.length < 8) {
-                            resetError = "Password must be at least 8 characters"
+                            resetError = context.getString(R.string.auth_reset_min_length)
                             return@TextButton
                         }
                         val success = authViewModel.resetMasterPasswordWithRecoveryKey(
@@ -420,7 +420,7 @@ fun AuthScreen(
                         if (success) {
                             showRecoveryDialog = false
                         } else {
-                            resetError = "Invalid recovery key"
+                            resetError = context.getString(R.string.error_invalid_recovery_key)
                         }
                     },
                     enabled = recoveryKeyInput.isNotBlank() && newRecoveryPassword.isNotBlank() && confirmRecoveryPassword.isNotBlank()

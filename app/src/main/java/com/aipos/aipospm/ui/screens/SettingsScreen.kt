@@ -185,12 +185,12 @@ fun SettingsScreen(
                 uri = uri,
                 onSuccess = { insertedCount ->
                     scope.launch {
-                        snackbarHostState.showSnackbar("Successfully imported $insertedCount entries")
+                        snackbarHostState.showSnackbar(context.getString(R.string.ui_successfully_imported_entries_6cac85, insertedCount))
                     }
                 },
                 onError = { error ->
                     scope.launch {
-                        snackbarHostState.showSnackbar("CSV Import failed: $error")
+                        snackbarHostState.showSnackbar(context.getString(R.string.ui_csv_import_failed_1bdf46, error))
                     }
                 }
             )
@@ -219,13 +219,13 @@ fun SettingsScreen(
                 onSuccess = {
                     isBackupInProgress = false
                     scope.launch {
-                        snackbarHostState.showSnackbar("Backup exported successfully")
+                        snackbarHostState.showSnackbar(context.getString(R.string.ui_backup_exported_successfully_659960))
                     }
                 },
                 onError = { error ->
                     isBackupInProgress = false
                     scope.launch {
-                        snackbarHostState.showSnackbar("Export failed: $error")
+                        snackbarHostState.showSnackbar(context.getString(R.string.ui_export_failed_fccfa9, error))
                     }
                 }
             )
@@ -264,7 +264,7 @@ fun SettingsScreen(
             text = {
                 Column {
                     Text(
-                        text = "Enter a password to encrypt your backup file. You will need this password to restore your vault data on any device.",
+                        text = stringResource(R.string.ui_enter_a_password_to_encrypt_your_bac_232579),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Spacer(modifier = Modifier.height(16.dp))
@@ -279,7 +279,7 @@ fun SettingsScreen(
                             IconButton(onClick = { backupPasswordVisible = !backupPasswordVisible }) {
                                 Icon(
                                     imageVector = if (backupPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                                    contentDescription = if (backupPasswordVisible) "Hide password" else "Show password"
+                                    contentDescription = if (backupPasswordVisible) stringResource(R.string.ui_hide_password_e40123) else stringResource(R.string.ui_show_password_044b85)
                                 )
                             }
                         },
@@ -297,7 +297,7 @@ fun SettingsScreen(
                             IconButton(onClick = { confirmBackupPasswordVisible = !confirmBackupPasswordVisible }) {
                                 Icon(
                                     imageVector = if (confirmBackupPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                                    contentDescription = if (confirmBackupPasswordVisible) "Hide password" else "Show password"
+                                    contentDescription = if (confirmBackupPasswordVisible) stringResource(R.string.ui_hide_password_e40123) else stringResource(R.string.ui_show_password_044b85)
                                 )
                             }
                         },
@@ -349,7 +349,7 @@ fun SettingsScreen(
             text = {
                 Column {
                     Text(
-                        text = "Enter the password that was used to encrypt this backup file to restore your database.",
+                        text = stringResource(R.string.ui_enter_the_password_that_was_used_to__3bd9a0),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Spacer(modifier = Modifier.height(12.dp))
@@ -364,7 +364,7 @@ fun SettingsScreen(
                             IconButton(onClick = { backupPasswordToEnterVisible = !backupPasswordToEnterVisible }) {
                                 Icon(
                                     imageVector = if (backupPasswordToEnterVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                                    contentDescription = if (backupPasswordToEnterVisible) "Hide password" else "Show password"
+                                    contentDescription = if (backupPasswordToEnterVisible) stringResource(R.string.ui_hide_password_e40123) else stringResource(R.string.ui_show_password_044b85)
                                 )
                             }
                         },
@@ -388,14 +388,14 @@ fun SettingsScreen(
                                     isBackupInProgress = false
                                     importUriString = null
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Database restored successfully")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_database_restored_successfully_5405b0))
                                     }
                                 },
                                 onError = { error ->
                                     isBackupInProgress = false
                                     importUriString = null
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Restore failed: $error")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_restore_failed_262b74, error))
                                     }
                                 }
                             )
@@ -459,7 +459,7 @@ fun SettingsScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Security",
+                    text = stringResource(R.string.ui_security_f25ce1),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
@@ -483,12 +483,12 @@ fun SettingsScreen(
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "Biometric Unlock",
+                                text = stringResource(R.string.ui_biometric_unlock_d9168c),
                                 style = MaterialTheme.typography.bodyLarge,
                                 fontWeight = FontWeight.Medium
                             )
                             Text(
-                                text = "Use fingerprint or face to unlock the app",
+                                text = stringResource(R.string.ui_use_fingerprint_or_face_to_unlock_th_686d9b),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -507,9 +507,9 @@ fun SettingsScreen(
             var timeoutMenuExpanded by remember { mutableStateOf(false) }
             val timeoutOptions = listOf(
                 Pair("Immediately", 0),
-                Pair("1 Minute", 1),
-                Pair("5 Minutes", 5),
-                Pair("10 Minutes", 10),
+                Pair(stringResource(R.string.auto_lock_one), 1),
+                Pair(stringResource(R.string.auto_lock_five), 5),
+                Pair(stringResource(R.string.auto_lock_ten), 10),
                 Pair("Never", -1)
             )
             val currentTimeoutLabel = timeoutOptions.firstOrNull { it.second == authState.autoLockTimeout }?.first ?: "Never"
@@ -530,12 +530,12 @@ fun SettingsScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Auto-Lock Timeout",
+                            text = stringResource(R.string.ui_auto_lock_timeout_d3ba9b),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "Lock app after backgrounding",
+                            text = stringResource(R.string.ui_lock_app_after_backgrounding_5989ac),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -581,12 +581,12 @@ fun SettingsScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Screen Privacy",
+                            text = stringResource(R.string.ui_screen_privacy_ebfaf4),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "Block screenshots and hide content in recent apps switcher",
+                            text = stringResource(R.string.ui_block_screenshots_and_hide_content_i_d6600c),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -619,7 +619,7 @@ fun SettingsScreen(
                             }
                         } else {
                             scope.launch {
-                                snackbarHostState.showSnackbar("Autofill requires Android 8.0 or higher")
+                                snackbarHostState.showSnackbar(context.getString(R.string.ui_autofill_requires_android_8_0_or_hig_03a52d))
                             }
                         }
                     },
@@ -638,7 +638,7 @@ fun SettingsScreen(
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = "Autofill Service",
+                                text = stringResource(R.string.ui_autofill_service_db7d4a),
                                 style = MaterialTheme.typography.bodyLarge,
                                 fontWeight = FontWeight.Medium
                             )
@@ -651,7 +651,7 @@ fun SettingsScreen(
                                         .padding(horizontal = 8.dp, vertical = 2.dp)
                                 ) {
                                     Text(
-                                        text = "Active",
+                                        text = stringResource(R.string.ui_active_a733b8),
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.Bold,
                                         color = SecurityGreen
@@ -665,7 +665,7 @@ fun SettingsScreen(
                                         .padding(horizontal = 8.dp, vertical = 2.dp)
                                 ) {
                                     Text(
-                                        text = "Disabled",
+                                        text = stringResource(R.string.ui_disabled_f4f447),
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.Bold,
                                         color = WarningAmber
@@ -675,9 +675,9 @@ fun SettingsScreen(
                         }
                         Text(
                             text = if (isAutofillEnabled)
-                                "AIPOS is ready to autofill passwords in apps & browsers"
+                                stringResource(R.string.autofill_ready)
                             else
-                                "Tap to enable AIPOS as your device's Autofill Provider",
+                                stringResource(R.string.autofill_enable),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -706,12 +706,12 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Change Master Password",
+                        text = stringResource(R.string.ui_change_master_password_78960e),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = "Update your master password",
+                        text = stringResource(R.string.ui_update_your_master_password_c68991),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -787,7 +787,7 @@ fun SettingsScreen(
                                 )
                                 if (success) {
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Password changed successfully")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_password_changed_successfully_e12081))
                                     }
                                     currentPassword = ""
                                     newPassword = ""
@@ -795,7 +795,7 @@ fun SettingsScreen(
                                     showChangePassword = false
                                 } else {
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Failed to change password")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_failed_to_change_password_2398d6))
                                     }
                                 }
                             },
@@ -833,12 +833,12 @@ fun SettingsScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Emergency Recovery Key",
+                            text = stringResource(R.string.ui_emergency_recovery_key_660854),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "View or copy your emergency recovery key",
+                            text = stringResource(R.string.ui_view_or_copy_your_emergency_recovery_9f3b48),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -861,7 +861,7 @@ fun SettingsScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "General",
+                    text = stringResource(R.string.ui_general_9239ee),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
@@ -887,12 +887,12 @@ fun SettingsScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Manage Categories",
+                            text = stringResource(R.string.ui_manage_categories_9a3491),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "Create and organize custom folders",
+                            text = stringResource(R.string.ui_create_and_organize_custom_folders_6525bc),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -922,7 +922,7 @@ fun SettingsScreen(
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = "Trash",
+                                text = stringResource(R.string.ui_trash_e3bf62),
                                 style = MaterialTheme.typography.bodyLarge,
                                 fontWeight = FontWeight.Medium
                             )
@@ -935,7 +935,7 @@ fun SettingsScreen(
                                         .padding(horizontal = 8.dp, vertical = 2.dp)
                                 ) {
                                     Text(
-                                        text = "$totalDeletedCount",
+                                        text = stringResource(R.string.ui_message_f8fb74, totalDeletedCount),
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.Bold,
                                         color = DangerRed
@@ -944,7 +944,7 @@ fun SettingsScreen(
                             }
                         }
                         Text(
-                            text = "Restore or permanently delete items (30-day auto purge)",
+                            text = stringResource(R.string.ui_restore_or_permanently_delete_items__0a49f0),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -967,7 +967,7 @@ fun SettingsScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Backup & Restore",
+                    text = stringResource(R.string.ui_backup_restore_3bdd40),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
@@ -983,12 +983,12 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Encrypted Local Backups",
+                        text = stringResource(R.string.ui_encrypted_local_backups_ab4aab),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = "Export your database to a password-encrypted file, or restore from a previously exported backup.",
+                        text = stringResource(R.string.ui_export_your_database_to_a_password_e_322f7e),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -1041,13 +1041,13 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Import Third-Party Vaults",
+                        text = stringResource(R.string.ui_import_third_party_vaults_5ec2c2),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Import credentials from Bitwarden, KeePass, or 1Password CSV exports. The file is processed completely offline, and all keys are securely encrypted.",
+                        text = stringResource(R.string.ui_import_credentials_from_bitwarden_ke_2d3605),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -1082,7 +1082,7 @@ fun SettingsScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "About",
+                    text = stringResource(R.string.ui_about_6b21fb),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
@@ -1097,11 +1097,11 @@ fun SettingsScreen(
                 )
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    InfoRow("App Name", "AIPOS Password Manager")
+                    InfoRow(stringResource(R.string.about_app_name), stringResource(R.string.app_name))
                     InfoRow("Version", "v1.6.1")
-                    InfoRow("Developed by", "gininaba")
-                    InfoRow("Security", "AES-256-GCM Encryption")
-                    InfoRow("Storage", "Fully Offline (Local Only)")
+                    InfoRow(stringResource(R.string.about_developer), stringResource(R.string.about_author))
+                    InfoRow(stringResource(R.string.about_security), stringResource(R.string.about_security_encryption))
+                    InfoRow(stringResource(R.string.about_storage), stringResource(R.string.about_offline))
                 }
             }
 
@@ -1124,7 +1124,7 @@ fun SettingsScreen(
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text(
-                        text = "To view your emergency recovery key, please verify your master password.",
+                        text = stringResource(R.string.ui_to_view_your_emergency_recovery_key__07c9e1),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     OutlinedTextField(
@@ -1168,10 +1168,10 @@ fun SettingsScreen(
                                 verifyPasswordInput = ""
                                 verifyError = null
                             } else {
-                                verifyError = "Recovery key not found. Please set a new password to generate one."
+                                verifyError = context.getString(R.string.auth_recovery_not_found)
                             }
                         } else {
-                            verifyError = "Incorrect master password"
+                            verifyError = context.getString(R.string.auth_incorrect_master)
                         }
                     },
                     enabled = verifyPasswordInput.isNotBlank()
@@ -1200,7 +1200,7 @@ fun SettingsScreen(
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     Text(
-                        text = "Write down this key or save it in a secure offline location.",
+                        text = stringResource(R.string.ui_write_down_this_key_or_save_it_in_a__985501),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Card(
@@ -1228,7 +1228,7 @@ fun SettingsScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        ClipboardHelper.copyAndScheduleClear(context, "Recovery Key", decryptedRecoveryKey)
+                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.txt_recovery_key_780fbb), decryptedRecoveryKey)
                     }
                 ) {
                     Text(stringResource(R.string.txt_copy_af74f7))

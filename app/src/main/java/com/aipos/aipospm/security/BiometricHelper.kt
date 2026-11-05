@@ -55,9 +55,9 @@ class BiometricHelper {
         val biometricPrompt = BiometricPrompt(activity, executor, callback)
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Unlock AIPOS")
-            .setSubtitle("Use your fingerprint or face to unlock")
-            .setNegativeButtonText("Use Password")
+            .setTitle(activity.getString(com.aipos.aipospm.R.string.biometric_title))
+            .setSubtitle(activity.getString(com.aipos.aipospm.R.string.biometric_subtitle))
+            .setNegativeButtonText(activity.getString(com.aipos.aipospm.R.string.biometric_use_password))
             .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
             .build()
 

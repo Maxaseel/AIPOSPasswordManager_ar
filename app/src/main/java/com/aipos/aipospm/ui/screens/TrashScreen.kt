@@ -110,7 +110,7 @@ fun TrashScreen(
             title = { Text(stringResource(R.string.txt_empty_trash_ad55b6)) },
             text = {
                 Text(
-                    "All $totalDeleted items in the trash will be permanently deleted. This action cannot be undone."
+                    stringResource(R.string.trash_empty_confirmation, totalDeleted)
                 )
             },
             confirmButton = {
@@ -120,7 +120,7 @@ fun TrashScreen(
                         apiKeyViewModel.emptyTrash()
                         showEmptyTrashDialog = false
                         scope.launch {
-                            snackbarHostState.showSnackbar("Trash emptied successfully")
+                            snackbarHostState.showSnackbar(context.getString(R.string.ui_trash_emptied_successfully_68ff89))
                         }
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = DangerRed)
@@ -157,7 +157,7 @@ fun TrashScreen(
                         passwordViewModel.permanentlyDeletePassword(entry.id)
                         passwordToDeletePermanently = null
                         scope.launch {
-                            snackbarHostState.showSnackbar("Password permanently deleted")
+                            snackbarHostState.showSnackbar(context.getString(R.string.ui_password_permanently_deleted_7fcdea))
                         }
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = DangerRed)
@@ -194,7 +194,7 @@ fun TrashScreen(
                         apiKeyViewModel.permanentlyDeleteApiKey(entry.id)
                         apiKeyToDeletePermanently = null
                         scope.launch {
-                            snackbarHostState.showSnackbar("API Key permanently deleted")
+                            snackbarHostState.showSnackbar(context.getString(R.string.ui_api_key_permanently_deleted_6f2e62))
                         }
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = DangerRed)
@@ -267,7 +267,7 @@ fun TrashScreen(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "Items in trash are automatically purged after 30 days.",
+                        text = stringResource(R.string.ui_items_in_trash_are_automatically_pur_a80a18),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -285,7 +285,7 @@ fun TrashScreen(
                     onClick = { selectedTabIndex = 0 },
                     text = {
                         Text(
-                            text = "Passwords (${deletedPasswords.size})",
+                            text = stringResource(R.string.ui_passwords_6e6219, deletedPasswords.size),
                             fontWeight = if (selectedTabIndex == 0) FontWeight.Bold else FontWeight.Normal
                         )
                     }
@@ -295,7 +295,7 @@ fun TrashScreen(
                     onClick = { selectedTabIndex = 1 },
                     text = {
                         Text(
-                            text = "API Keys (${deletedApiKeys.size})",
+                            text = stringResource(R.string.ui_api_keys_13d1ca, deletedApiKeys.size),
                             fontWeight = if (selectedTabIndex == 1) FontWeight.Bold else FontWeight.Normal
                         )
                     }
@@ -318,7 +318,7 @@ fun TrashScreen(
                                 onRestore = {
                                     passwordViewModel.restorePassword(entry)
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Restored '${entry.title}'")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_restored_6a488c, entry.title))
                                     }
                                 },
                                 onDeletePermanently = {
@@ -330,7 +330,7 @@ fun TrashScreen(
                 }
             } else {
                 if (deletedApiKeys.isEmpty()) {
-                    TrashEmptyView(itemType = "API keys")
+                    TrashEmptyView(itemType = stringResource(R.string.trash_api_keys))
                 } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -343,7 +343,7 @@ fun TrashScreen(
                                 onRestore = {
                                     apiKeyViewModel.restoreApiKey(entry)
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Restored '${entry.serviceName}'")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_restored_54b383, entry.serviceName))
                                     }
                                 },
                                 onDeletePermanently = {
@@ -566,7 +566,7 @@ private fun DaysRemainingBadge(daysRemaining: Int) {
             .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Text(
-            text = "$daysRemaining d left",
+            text = stringResource(R.string.ui_d_left_0d1f73, daysRemaining),
             style = MaterialTheme.typography.labelSmall,
             fontWeight = FontWeight.Medium,
             color = badgeColor
@@ -602,14 +602,14 @@ private fun TrashEmptyView(itemType: String) {
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "No deleted $itemType",
+                text = stringResource(R.string.ui_no_deleted_f11300, itemType),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = "Deleted entries stay here for 30 days before being permanently removed.",
+                text = stringResource(R.string.ui_deleted_entries_stay_here_for_30_day_898dc8),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 24.dp),

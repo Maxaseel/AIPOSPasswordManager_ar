@@ -3,13 +3,13 @@ package com.aipos.aipospm.data
 import android.content.Context
 import android.content.SharedPreferences
 
-enum class SortOption(val displayName: String) {
-    NAME_ASC("Name (A–Z)"),
-    NAME_DESC("Name (Z–A)"),
-    UPDATED_DESC("Recently Updated"),
-    CREATED_DESC("Date Created (Newest)"),
-    CREATED_ASC("Date Created (Oldest)"),
-    CUSTOM("Custom Order")
+enum class SortOption(@androidx.annotation.StringRes val labelRes: Int) {
+    NAME_ASC(com.aipos.aipospm.R.string.ui_name_a_z_c93e4c),
+    NAME_DESC(com.aipos.aipospm.R.string.ui_name_z_a_998081),
+    UPDATED_DESC(com.aipos.aipospm.R.string.ui_recently_updated_04bf53),
+    CREATED_DESC(com.aipos.aipospm.R.string.ui_date_created_newest_6cb4b8),
+    CREATED_ASC(com.aipos.aipospm.R.string.ui_date_created_oldest_dcdcff),
+    CUSTOM(com.aipos.aipospm.R.string.ui_custom_order_730cde)
 }
 
 /**

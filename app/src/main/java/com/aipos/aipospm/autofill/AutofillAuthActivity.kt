@@ -1,5 +1,7 @@
 package com.aipos.aipospm.autofill
 
+import com.aipos.aipospm.R
+
 import android.app.Activity
 import android.app.assist.AssistStructure
 import android.content.Context
@@ -45,6 +47,7 @@ import com.aipos.aipospm.ui.theme.AIPOSPasswordManagerTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.compose.ui.res.stringResource
 
 /**
  * Overlay authentication and credential selection activity for Android Autofill.
@@ -247,12 +250,12 @@ class AutofillAuthActivity : FragmentActivity() {
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                text = "Unlock AIPOS Autofill",
+                                text = stringResource(R.string.ui_unlock_aipos_autofill_e37f8f),
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "Enter Master Password to autofill credentials",
+                                text = stringResource(R.string.ui_enter_master_password_to_autofill_cr_f12168),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -265,7 +268,7 @@ class AutofillAuthActivity : FragmentActivity() {
                                     masterPasswordInput = it
                                     errorMessage = null
                                 },
-                                label = { Text("Master Password") },
+                                label = { Text(stringResource(R.string.ui_master_password_5654ce)) },
                                 visualTransformation = PasswordVisualTransformation(),
                                 isError = errorMessage != null,
                                 singleLine = true,
@@ -289,7 +292,7 @@ class AutofillAuthActivity : FragmentActivity() {
                                 horizontalArrangement = Arrangement.End
                             ) {
                                 TextButton(onClick = onDismiss) {
-                                    Text("Cancel")
+                                    Text(stringResource(R.string.ui_cancel_77dfd2))
                                 }
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Button(
@@ -311,12 +314,12 @@ class AutofillAuthActivity : FragmentActivity() {
                                                 }
                                             }
                                         } else {
-                                            errorMessage = "Incorrect master password"
+                                            errorMessage = getString(com.aipos.aipospm.R.string.autofill_incorrect_master)
                                         }
                                     },
                                     shape = RoundedCornerShape(12.dp)
                                 ) {
-                                    Text("Unlock & Fill")
+                                    Text(stringResource(R.string.ui_unlock_fill_f0d1d8))
                                 }
                             }
                         }
@@ -333,12 +336,12 @@ class AutofillAuthActivity : FragmentActivity() {
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Select Account to Fill",
+                                    text = stringResource(R.string.ui_select_account_to_fill_2fda0d),
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold
                                 )
                                 IconButton(onClick = onDismiss) {
-                                    Icon(Icons.Default.Close, contentDescription = "Close")
+                                    Icon(Icons.Default.Close, contentDescription = stringResource(R.string.ui_close_bbfa77))
                                 }
                             }
 
@@ -347,7 +350,7 @@ class AutofillAuthActivity : FragmentActivity() {
                             OutlinedTextField(
                                 value = searchQuery,
                                 onValueChange = { searchQuery = it },
-                                placeholder = { Text("Search vault...") },
+                                placeholder = { Text(stringResource(R.string.ui_search_vault_b5ba2f)) },
                                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(12.dp),
@@ -437,9 +440,9 @@ class AutofillAuthActivity : FragmentActivity() {
         })
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Unlock AIPOS Autofill")
-            .setSubtitle("Confirm your biometric to fill credentials")
-            .setNegativeButtonText("Use Password")
+            .setTitle(getString(com.aipos.aipospm.R.string.autofill_biometric_title))
+            .setSubtitle(getString(com.aipos.aipospm.R.string.autofill_biometric_subtitle))
+            .setNegativeButtonText(getString(com.aipos.aipospm.R.string.biometric_use_password))
             .setConfirmationRequired(false)
             .build()
 

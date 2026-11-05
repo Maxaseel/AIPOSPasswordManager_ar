@@ -169,9 +169,9 @@ fun PasswordGeneratorScreen(
                     Text(
                         text = when (uiState.strength) {
                             PasswordStrength.NONE -> ""
-                            PasswordStrength.WEAK -> "Weak"
-                            PasswordStrength.MEDIUM -> "Medium"
-                            PasswordStrength.STRONG -> "Strong"
+                            PasswordStrength.WEAK -> stringResource(R.string.state_weak)
+                            PasswordStrength.MEDIUM -> stringResource(R.string.state_medium)
+                            PasswordStrength.STRONG -> stringResource(R.string.state_strong)
                         },
                         style = MaterialTheme.typography.labelSmall,
                         color = strengthColor
@@ -188,9 +188,9 @@ fun PasswordGeneratorScreen(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 generatorViewModel.recordCurrentPasswordInHistory()
-                                ClipboardHelper.copyAndScheduleClear(context, "Generated Password", uiState.generatedPassword)
+                                ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_generated_password), uiState.generatedPassword)
                                 scope.launch {
-                                    snackbarHostState.showSnackbar("Password copied (clears in 30s)")
+                                    snackbarHostState.showSnackbar(context.getString(R.string.ui_password_copied_clears_in_30s_741f7c))
                                 }
                             },
                             modifier = Modifier.weight(1f),
@@ -264,12 +264,12 @@ fun PasswordGeneratorScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Length",
+                            text = stringResource(R.string.ui_length_3bade3),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "${uiState.length} characters",
+                            text = stringResource(R.string.ui_characters_ba989f, uiState.length),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.SemiBold
@@ -304,29 +304,29 @@ fun PasswordGeneratorScreen(
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(
-                        text = "Character Types",
+                        text = stringResource(R.string.ui_character_types_86006d),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
                     ToggleRow(
-                        label = "Uppercase (A-Z)",
+                        label = stringResource(R.string.ui_uppercase),
                         checked = uiState.useUppercase,
                         onCheckedChange = { generatorViewModel.toggleUppercase(it) }
                     )
                     ToggleRow(
-                        label = "Lowercase (a-z)",
+                        label = stringResource(R.string.ui_lowercase),
                         checked = uiState.useLowercase,
                         onCheckedChange = { generatorViewModel.toggleLowercase(it) }
                     )
                     ToggleRow(
-                        label = "Digits (0-9)",
+                        label = stringResource(R.string.ui_digits),
                         checked = uiState.useDigits,
                         onCheckedChange = { generatorViewModel.toggleDigits(it) }
                     )
                     ToggleRow(
-                        label = "Symbols (!@#\$%...)",
+                        label = stringResource(R.string.ui_symbols),
                         checked = uiState.useSymbols,
                         onCheckedChange = { generatorViewModel.toggleSymbols(it) }
                     )
@@ -344,7 +344,7 @@ fun PasswordGeneratorScreen(
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Text(
-                            text = "History",
+                            text = stringResource(R.string.ui_history_90ccd6),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Medium
                         )
@@ -367,9 +367,9 @@ fun PasswordGeneratorScreen(
                                 IconButton(
                                     onClick = {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        ClipboardHelper.copyAndScheduleClear(context, "Generated Password", hist)
+                                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_generated_password), hist)
                                         scope.launch {
-                                            snackbarHostState.showSnackbar("Password copied (clears in 30s)")
+                                            snackbarHostState.showSnackbar(context.getString(R.string.ui_password_copied_clears_in_30s_741f7c))
                                         }
                                     },
                                     modifier = Modifier.size(36.dp)

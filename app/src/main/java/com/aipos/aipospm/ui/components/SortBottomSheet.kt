@@ -68,7 +68,7 @@ fun SortBottomSheet(
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
-                    text = "Sort Vault",
+                    text = stringResource(R.string.ui_sort_vault_7e85da),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -96,12 +96,12 @@ fun SortBottomSheet(
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Text(
-                            text = "Keep Favorites on Top",
+                            text = stringResource(R.string.ui_keep_favorites_on_top_c98ee6),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "Starred items always appear first",
+                            text = stringResource(R.string.ui_starred_items_always_appear_first_79a27e),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -120,7 +120,7 @@ fun SortBottomSheet(
             )
 
             Text(
-                text = "SORT BY",
+                text = stringResource(R.string.ui_sort_by_d09f97),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
@@ -141,7 +141,7 @@ fun SortBottomSheet(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = option.displayName,
+                        text = stringResource(option.labelRes),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
                         color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface

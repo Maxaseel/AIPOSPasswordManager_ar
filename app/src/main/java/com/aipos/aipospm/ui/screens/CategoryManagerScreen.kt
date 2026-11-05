@@ -271,7 +271,7 @@ fun CategoryManagerScreen(
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = if (selectedType == CategoryType.PASSWORD) "No password categories created yet" else "No API key categories created yet",
+                        text = if (selectedType == CategoryType.PASSWORD) stringResource(R.string.ui_no_password_categories_created_yet_64956b) else stringResource(R.string.ui_no_api_key_categories_created_yet_c4eccd),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.outline
                     )

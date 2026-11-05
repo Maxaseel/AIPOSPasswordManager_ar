@@ -190,7 +190,7 @@ fun AddEditApiKeyScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = if (isEditing) "Edit API Key" else "Add API Key",
+                        text = if (isEditing) stringResource(R.string.ui_edit_api_key_fc7673) else stringResource(R.string.ui_add_api_key_14b400),
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -231,7 +231,7 @@ fun AddEditApiKeyScreen(
                     sheetState = iconPickerSheetState,
                     currentIconId = iconId,
                     defaultIconVector = Icons.Default.VpnKey,
-                    defaultLabel = "Default (Key)",
+                    defaultLabel = stringResource(R.string.default_icon_key),
                     onIconSelected = { iconId = it },
                     onDismissRequest = { showIconPicker = false }
                 )
@@ -274,12 +274,12 @@ fun AddEditApiKeyScreen(
 
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Custom Icon",
+                            text = stringResource(R.string.ui_custom_icon_e6d6de),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = VaultIconRegistry.getIconItem(iconId)?.label ?: "Default (Key)",
+                            text = VaultIconRegistry.getIconItem(iconId)?.let { stringResource(it.labelRes) } ?: stringResource(R.string.ui_default_key_a94571),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onSurface
@@ -409,8 +409,8 @@ fun AddEditApiKeyScreen(
                             },
                             label = {
                                 Text(
-                                    text = if (matchingCat != null) "Suggested: ${matchingCat.name}"
-                                    else "Create Folder: $suggestedCategoryName",
+                                    text = if (matchingCat != null) stringResource(R.string.ui_suggested_fd55e9, matchingCat.name)
+                                    else stringResource(R.string.create_folder, suggestedCategoryName),
                                     style = MaterialTheme.typography.labelMedium
                                 )
                             },
@@ -447,7 +447,7 @@ fun AddEditApiKeyScreen(
                         Icon(
                             imageVector = if (keyVisible) Icons.Default.VisibilityOff
                             else Icons.Default.Visibility,
-                            contentDescription = if (keyVisible) "Hide" else "Show"
+                            contentDescription = if (keyVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e)
                         )
                     }
                 },
@@ -493,7 +493,7 @@ fun AddEditApiKeyScreen(
                 )
             ) {
                 Text(
-                    text = if (isEditing) "Update API Key" else "Save API Key",
+                    text = if (isEditing) stringResource(R.string.ui_update_api_key_f678c6) else stringResource(R.string.ui_save_api_key_074fe7),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold
                 )

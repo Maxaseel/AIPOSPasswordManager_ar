@@ -227,7 +227,7 @@ fun ApiKeyListContent(
                                 Box(modifier = Modifier.weight(1f)) {
                                     if (searchQuery.isEmpty()) {
                                         Text(
-                                            text = "Search API keys...",
+                                            text = stringResource(R.string.ui_search_api_keys_62588e),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                                         )
@@ -319,15 +319,15 @@ fun ApiKeyListContent(
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = if (searchQuery.isNotEmpty() || selectedCategoryIdFilter != null) "No results found"
-                        else "No API keys saved yet",
+                        text = if (searchQuery.isNotEmpty() || selectedCategoryIdFilter != null) stringResource(R.string.ui_no_results_found_658e79)
+                        else stringResource(R.string.empty_no_api_keys),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = if (searchQuery.isNotEmpty() || selectedCategoryIdFilter != null) "Try a different search or filter"
-                        else "Tap the + button to add your first API key",
+                        text = if (searchQuery.isNotEmpty() || selectedCategoryIdFilter != null) stringResource(R.string.ui_try_a_different_search_or_filter_90f2c1)
+                        else stringResource(R.string.empty_add_first_api_key),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
@@ -352,14 +352,14 @@ fun ApiKeyListContent(
                         Column(modifier = Modifier.fillMaxWidth()) {
                             if (isFirstFavorite) {
                                 VaultSectionHeader(
-                                    title = "Favorites",
+                                    title = stringResource(R.string.ui_favorites_07b3e4),
                                     count = apiKeys.count { it.isFavorite },
                                     icon = Icons.Default.Star,
                                     tint = MaterialTheme.colorScheme.secondary
                                 )
                             } else if (isFirstNonFavorite) {
                                 VaultSectionHeader(
-                                    title = "All API Keys",
+                                    title = stringResource(R.string.ui_all_api_keys_0f404f),
                                     count = apiKeys.count { !it.isFavorite },
                                     icon = Icons.Default.VpnKey,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -374,7 +374,7 @@ fun ApiKeyListContent(
                                         apiKeyViewModel.deleteApiKey(entry)
                                         scope.launch {
                                             val result = snackbarHostState.showSnackbar(
-                                                message = "API key '${entry.serviceName}' deleted",
+                                                message = context.getString(R.string.ui_api_key_deleted_ad046d, entry.serviceName),
                                                 actionLabel = "Undo"
                                             )
                                             if (result == SnackbarResult.ActionPerformed) {
@@ -432,9 +432,9 @@ fun ApiKeyListContent(
                                     onClick = { onNavigateToDetail(entry.id) },
                                     onFavoriteClick = { apiKeyViewModel.toggleFavorite(entry) },
                                     onCopyName = {
-                                        ClipboardHelper.copyAndScheduleClear(context, "Service Name", entry.serviceName)
+                                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_service_name), entry.serviceName)
                                         scope.launch {
-                                            snackbarHostState.showSnackbar("Service name copied (clears in 30s)")
+                                            snackbarHostState.showSnackbar(context.getString(R.string.ui_service_name_copied_clears_in_30s_a95b7e))
                                         }
                                     },
                                     onMoveUp = if (canMoveUp) {

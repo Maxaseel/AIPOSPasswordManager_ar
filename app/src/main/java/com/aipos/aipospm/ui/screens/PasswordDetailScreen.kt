@@ -359,13 +359,13 @@ fun PasswordDetailScreen(
 
                 // Username
                 DetailField(
-                    label = "Username / Email",
+                    label = stringResource(R.string.ui_username_email),
                     value = entry.username,
                     icon = Icons.Default.Person,
                     onCopy = {
-                        ClipboardHelper.copyAndScheduleClear(context, "Username", entry.username)
+                        ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_username), entry.username)
                         scope.launch {
-                            snackbarHostState.showSnackbar("Username copied (clears in 30s)")
+                            snackbarHostState.showSnackbar(context.getString(R.string.ui_username_copied_clears_in_30s_8461b7))
                         }
                     }
                 )
@@ -382,7 +382,7 @@ fun PasswordDetailScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Password",
+                            text = stringResource(R.string.ui_password_8be3c9),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -402,7 +402,7 @@ fun PasswordDetailScreen(
                                 Icon(
                                     imageVector = if (passwordVisible) Icons.Default.VisibilityOff
                                     else Icons.Default.Visibility,
-                                    contentDescription = if (passwordVisible) "Hide" else "Show",
+                                    contentDescription = if (passwordVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e),
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
@@ -410,7 +410,7 @@ fun PasswordDetailScreen(
                                 onClick = {
                                     ClipboardHelper.copyAndScheduleClear(context, "Password", decryptedPassword)
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("Password copied (clears in 30s)")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_password_copied_clears_in_30s_741f7c))
                                     }
                                     isPasswordCopied = true
                                 },
@@ -418,7 +418,7 @@ fun PasswordDetailScreen(
                             ) {
                                 Icon(
                                     imageVector = if (isPasswordCopied) Icons.Default.Check else Icons.Default.ContentCopy,
-                                    contentDescription = if (isPasswordCopied) "Copied" else "Copy",
+                                    contentDescription = if (isPasswordCopied) stringResource(R.string.ui_copied_8e3df4) else stringResource(R.string.ui_copy_af74f7),
                                     modifier = Modifier.size(20.dp),
                                     tint = if (isPasswordCopied) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
                                 )
@@ -452,16 +452,16 @@ fun PasswordDetailScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Password Security Audit",
+                                    text = stringResource(R.string.ui_password_security_audit_b31abd),
                                     style = MaterialTheme.typography.labelMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                                 Text(
                                     text = when (strength) {
-                                        PasswordStrength.NONE -> "Unknown"
-                                        PasswordStrength.WEAK -> "Weak"
-                                        PasswordStrength.MEDIUM -> "Medium"
-                                        PasswordStrength.STRONG -> "Strong"
+                                        PasswordStrength.NONE -> stringResource(R.string.state_unknown)
+                                        PasswordStrength.WEAK -> stringResource(R.string.state_weak)
+                                        PasswordStrength.MEDIUM -> stringResource(R.string.state_medium)
+                                        PasswordStrength.STRONG -> stringResource(R.string.state_strong)
                                     },
                                     style = MaterialTheme.typography.labelSmall,
                                     fontWeight = FontWeight.Bold,
@@ -510,7 +510,7 @@ fun PasswordDetailScreen(
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
-                                        text = "Compromised: Weak or publicly breached",
+                                        text = stringResource(R.string.ui_compromised_weak_or_publicly_breache_c11d92),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.error,
                                         fontWeight = FontWeight.Medium
@@ -542,7 +542,7 @@ fun PasswordDetailScreen(
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Two-Factor Code (TOTP)",
+                                    text = stringResource(R.string.ui_two_factor_code_totp_dbd478),
                                     style = MaterialTheme.typography.labelMedium,
                                     color = MaterialTheme.colorScheme.onTertiaryContainer
                                 )
@@ -585,7 +585,7 @@ fun PasswordDetailScreen(
                                         strokeCap = StrokeCap.Round
                                     )
                                     Text(
-                                        text = "$totpSecondsRemaining",
+                                        text = stringResource(R.string.ui_message_c92949, totpSecondsRemaining),
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.Bold,
                                         color = countdownColor
@@ -599,7 +599,7 @@ fun PasswordDetailScreen(
                                     onClick = {
                                         ClipboardHelper.copyAndScheduleClear(context, "TOTP", totpCode)
                                         scope.launch {
-                                            snackbarHostState.showSnackbar("2FA code copied (clears in 30s)")
+                                            snackbarHostState.showSnackbar(context.getString(R.string.ui_2fa_code_copied_clears_in_30s_c851ca))
                                         }
                                         isTotpCopied = true
                                     },
@@ -607,7 +607,7 @@ fun PasswordDetailScreen(
                                 ) {
                                     Icon(
                                         imageVector = if (isTotpCopied) Icons.Default.Check else Icons.Default.ContentCopy,
-                                        contentDescription = if (isTotpCopied) "Copied" else "Copy TOTP",
+                                        contentDescription = if (isTotpCopied) stringResource(R.string.ui_copied_8e3df4) else stringResource(R.string.ui_copy_totp_1bece4),
                                         modifier = Modifier.size(20.dp),
                                         tint = if (isTotpCopied) MaterialTheme.colorScheme.primary
                                         else MaterialTheme.colorScheme.onTertiaryContainer
@@ -621,13 +621,13 @@ fun PasswordDetailScreen(
                 if (entry.url.isNotEmpty()) {
                     Spacer(modifier = Modifier.height(12.dp))
                     DetailField(
-                        label = "Website URL",
+                        label = stringResource(R.string.txt_website_url_b32233),
                         value = entry.url,
                         icon = Icons.Default.Language,
                         onCopy = {
-                            ClipboardHelper.copyAndScheduleClear(context, "Website URL", entry.url)
+                            ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.txt_website_url_b32233), entry.url)
                             scope.launch {
-                                snackbarHostState.showSnackbar("URL copied (clears in 30s)")
+                                snackbarHostState.showSnackbar(context.getString(R.string.ui_url_copied_clears_in_30s_1b883f))
                             }
                         },
                         onAction = {
@@ -641,12 +641,12 @@ fun PasswordDetailScreen(
                                 context.startActivity(intent)
                             } catch (e: Exception) {
                                 scope.launch {
-                                    snackbarHostState.showSnackbar("Could not open browser for this URL")
+                                    snackbarHostState.showSnackbar(context.getString(R.string.ui_could_not_open_browser_for_this_url_31fbf7))
                                 }
                             }
                         },
                         actionIcon = Icons.AutoMirrored.Filled.OpenInNew,
-                        actionDescription = "Open in Browser"
+                        actionDescription = stringResource(R.string.open_in_browser)
                     )
                 }
 
@@ -661,7 +661,7 @@ fun PasswordDetailScreen(
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
-                                text = "Notes",
+                                text = stringResource(R.string.ui_notes_704400),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -677,16 +677,17 @@ fun PasswordDetailScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Timestamps
-                val dateFormat = remember {
-                    SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.getDefault())
+                val datePattern = stringResource(R.string.ui_date_format)
+                val dateFormat = remember(datePattern) {
+                    SimpleDateFormat(datePattern, Locale.getDefault())
                 }
                 Text(
-                    text = "Created: ${dateFormat.format(Date(entry.createdAt))}",
+                    text = stringResource(R.string.ui_created_caa319, dateFormat.format(Date(entry.createdAt))),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline
                 )
                 Text(
-                    text = "Updated: ${dateFormat.format(Date(entry.updatedAt))}",
+                    text = stringResource(R.string.ui_updated_ce87a3, dateFormat.format(Date(entry.updatedAt))),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline
                 )
@@ -813,7 +814,7 @@ private fun DetailField(
                 ) {
                     Icon(
                         imageVector = if (isCopied) Icons.Default.Check else Icons.Default.ContentCopy,
-                        contentDescription = if (isCopied) "Copied" else "Copy",
+                        contentDescription = if (isCopied) stringResource(R.string.ui_copied_8e3df4) else stringResource(R.string.ui_copy_af74f7),
                         modifier = Modifier.size(20.dp),
                         tint = if (isCopied) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
                     )

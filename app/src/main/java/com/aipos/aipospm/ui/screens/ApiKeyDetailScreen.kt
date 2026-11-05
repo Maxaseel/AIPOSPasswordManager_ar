@@ -284,7 +284,7 @@ fun ApiKeyDetailScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "API Key",
+                            text = stringResource(R.string.ui_api_key_47acd2),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -304,15 +304,15 @@ fun ApiKeyDetailScreen(
                                 Icon(
                                     imageVector = if (keyVisible) Icons.Default.VisibilityOff
                                     else Icons.Default.Visibility,
-                                    contentDescription = if (keyVisible) "Hide" else "Show",
+                                    contentDescription = if (keyVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e),
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
                             IconButton(
                                 onClick = {
-                                    ClipboardHelper.copyAndScheduleClear(context, "API Key", decryptedKey)
+                                    ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.ui_api_key_47acd2), decryptedKey)
                                     scope.launch {
-                                        snackbarHostState.showSnackbar("API key copied (clears in 30s)")
+                                        snackbarHostState.showSnackbar(context.getString(R.string.ui_api_key_copied_clears_in_30s_920e8d))
                                     }
                                     isKeyCopied = true
                                 },
@@ -320,7 +320,7 @@ fun ApiKeyDetailScreen(
                             ) {
                                 Icon(
                                     imageVector = if (isKeyCopied) Icons.Default.Check else Icons.Default.ContentCopy,
-                                    contentDescription = if (isKeyCopied) "Copied" else "Copy",
+                                    contentDescription = if (isKeyCopied) stringResource(R.string.ui_copied_8e3df4) else stringResource(R.string.ui_copy_af74f7),
                                     modifier = Modifier.size(20.dp),
                                     tint = if (isKeyCopied) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
                                 )
@@ -340,7 +340,7 @@ fun ApiKeyDetailScreen(
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
-                                text = "Notes",
+                                text = stringResource(R.string.ui_notes_704400),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -355,16 +355,17 @@ fun ApiKeyDetailScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                val dateFormat = remember {
-                    SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.getDefault())
+                val datePattern = stringResource(R.string.ui_date_format)
+                val dateFormat = remember(datePattern) {
+                    SimpleDateFormat(datePattern, Locale.getDefault())
                 }
                 Text(
-                    text = "Created: ${dateFormat.format(Date(entry.createdAt))}",
+                    text = stringResource(R.string.ui_created_caa319, dateFormat.format(Date(entry.createdAt))),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline
                 )
                 Text(
-                    text = "Updated: ${dateFormat.format(Date(entry.updatedAt))}",
+                    text = stringResource(R.string.ui_updated_ce87a3, dateFormat.format(Date(entry.updatedAt))),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline
                 )

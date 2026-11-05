@@ -174,7 +174,7 @@ fun SetupScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "Emergency Recovery Key",
+                    text = stringResource(R.string.ui_emergency_recovery_key_660854),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground,
@@ -184,7 +184,7 @@ fun SetupScreen(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = "Write down or save this key in a secure offline location. This is the only way to recover your data if you forget your master password.",
+                    text = stringResource(R.string.ui_write_down_or_save_this_key_in_a_sec_11eb10),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
@@ -217,7 +217,7 @@ fun SetupScreen(
 
                         Button(
                             onClick = {
-                                ClipboardHelper.copyAndScheduleClear(context, "Recovery Key", generatedRecoveryKey)
+                                ClipboardHelper.copyAndScheduleClear(context, context.getString(R.string.txt_recovery_key_780fbb), generatedRecoveryKey)
                             },
                             shape = RoundedCornerShape(12.dp),
                             colors = ButtonDefaults.buttonColors(
@@ -251,7 +251,7 @@ fun SetupScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "AIPOS is fully offline. If you lose this key and forget your master password, your vault cannot be recovered.",
+                            text = stringResource(R.string.ui_aipos_is_fully_offline_if_you_lose_t_613cb8),
                             color = MaterialTheme.colorScheme.onErrorContainer,
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Medium
@@ -274,7 +274,7 @@ fun SetupScreen(
                     )
                 ) {
                     Text(
-                        text = "I Have Saved The Key",
+                        text = stringResource(R.string.ui_i_have_saved_the_key_8cee6a),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -320,7 +320,7 @@ fun SetupScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "Welcome to AIPOS",
+                    text = stringResource(R.string.ui_welcome_to_aipos_c9e613),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -329,7 +329,7 @@ fun SetupScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Create a master password to secure\nyour passwords and API keys",
+                    text = stringResource(R.string.ui_create_a_master_password_to_secure_n_4bdfcc),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
@@ -365,7 +365,7 @@ fun SetupScreen(
                             Icon(
                                 imageVector = if (passwordVisible) Icons.Default.VisibilityOff
                                 else Icons.Default.Visibility,
-                                contentDescription = if (passwordVisible) "Hide" else "Show"
+                                contentDescription = if (passwordVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e)
                             )
                         }
                     },
@@ -407,10 +407,10 @@ fun SetupScreen(
                         )
                     ) {
                         Column(modifier = Modifier.padding(12.dp)) {
-                            RequirementRow("At least 8 characters", hasMinLength)
-                            RequirementRow("One uppercase letter (A-Z)", hasUppercase)
-                            RequirementRow("One number (0-9)", hasDigit)
-                            RequirementRow("One symbol (!@#\$...)", hasSymbol)
+                            RequirementRow(stringResource(R.string.req_min_length), hasMinLength)
+                            RequirementRow(stringResource(R.string.req_uppercase), hasUppercase)
+                            RequirementRow(stringResource(R.string.req_number), hasDigit)
+                            RequirementRow(stringResource(R.string.req_symbol), hasSymbol)
                         }
                     }
 
@@ -435,7 +435,7 @@ fun SetupScreen(
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "This password is in the common/breached passwords list. Please use a stronger master password.",
+                                    text = stringResource(R.string.ui_this_password_is_in_the_common_breac_eec30f),
                                     color = MaterialTheme.colorScheme.onErrorContainer,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontWeight = FontWeight.Medium
@@ -460,7 +460,7 @@ fun SetupScreen(
                             Icon(
                                 imageVector = if (confirmVisible) Icons.Default.VisibilityOff
                                 else Icons.Default.Visibility,
-                                contentDescription = if (confirmVisible) "Hide" else "Show"
+                                contentDescription = if (confirmVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e)
                             )
                         }
                     },
@@ -476,12 +476,12 @@ fun SetupScreen(
                     ) {
                         Column {
                             Text(
-                                text = "Enable Biometric Unlock",
+                                text = stringResource(R.string.ui_enable_biometric_unlock_a906d8),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground
                             )
                             Text(
-                                text = "Use fingerprint or face to unlock",
+                                text = stringResource(R.string.ui_use_fingerprint_or_face_to_unlock_99e2c2),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -515,7 +515,7 @@ fun SetupScreen(
                     )
                 ) {
                     Text(
-                        text = "Create Password",
+                        text = stringResource(R.string.ui_create_password_710a41),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -547,7 +547,7 @@ fun SetupScreen(
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = "How your data stays safe",
+                                text = stringResource(R.string.ui_how_your_data_stays_safe_a110a2),
                                 style = MaterialTheme.typography.labelLarge,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -555,7 +555,7 @@ fun SetupScreen(
                         }
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "All data is encrypted with AES-256-GCM and stored locally on your device. Nothing is sent to any server. Your master password never leaves this device.",
+                            text = stringResource(R.string.ui_all_data_is_encrypted_with_aes_256_g_946b65),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center

@@ -152,7 +152,7 @@ fun AddEditPasswordScreen(
                 showScanner = true
             } else {
                 scope.launch {
-                    snackbarHostState.showSnackbar("Camera permission is required to scan QR codes")
+                    snackbarHostState.showSnackbar(context.getString(R.string.ui_camera_permission_is_required_to_sca_2d7757))
                 }
             }
         }
@@ -265,7 +265,7 @@ fun AddEditPasswordScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = if (isEditing) "Edit Password" else "Add Password",
+                        text = if (isEditing) stringResource(R.string.ui_edit_password_259353) else stringResource(R.string.ui_add_password_6e19a6),
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -306,7 +306,7 @@ fun AddEditPasswordScreen(
                     sheetState = iconPickerSheetState,
                     currentIconId = iconId,
                     defaultIconVector = Icons.Default.Password,
-                    defaultLabel = "Default (Auto / First Letter)",
+                    defaultLabel = stringResource(R.string.default_icon_password),
                     onIconSelected = { iconId = it },
                     onDismissRequest = { showIconPicker = false }
                 )
@@ -365,12 +365,12 @@ fun AddEditPasswordScreen(
 
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Custom Icon",
+                            text = stringResource(R.string.ui_custom_icon_e6d6de),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = VaultIconRegistry.getIconItem(iconId)?.label ?: "Default (Auto / First Letter)",
+                            text = VaultIconRegistry.getIconItem(iconId)?.let { stringResource(it.labelRes) } ?: stringResource(R.string.ui_default_auto_first_letter_ad3ec0),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onSurface
@@ -500,8 +500,8 @@ fun AddEditPasswordScreen(
                             },
                             label = {
                                 Text(
-                                    text = if (matchingCat != null) "Suggested: ${matchingCat.name}"
-                                    else "Create Folder: $suggestedCategoryName",
+                                    text = if (matchingCat != null) stringResource(R.string.ui_suggested_fd55e9, matchingCat.name)
+                                    else stringResource(R.string.create_folder, suggestedCategoryName),
                                     style = MaterialTheme.typography.labelMedium
                                 )
                             },
@@ -549,7 +549,7 @@ fun AddEditPasswordScreen(
                         Icon(
                             imageVector = if (passwordVisible) Icons.Default.VisibilityOff
                             else Icons.Default.Visibility,
-                            contentDescription = if (passwordVisible) "Hide" else "Show"
+                            contentDescription = if (passwordVisible) stringResource(R.string.ui_hide_34d8b6) else stringResource(R.string.ui_show_d97d1e)
                         )
                     }
                 },
@@ -570,7 +570,7 @@ fun AddEditPasswordScreen(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "This password is in the common/breached passwords list. It is highly recommended to choose a stronger password.",
+                        text = stringResource(R.string.ui_this_password_is_in_the_common_breac_0c087a),
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall
                     )
@@ -665,13 +665,13 @@ fun AddEditPasswordScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Two-Factor Authentication (TOTP)",
+                            text = stringResource(R.string.ui_two_factor_authentication_totp_f5be30),
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier.weight(1f)
                         )
                         Text(
-                            text = if (showTotpField) "Hide" else if (totpSecret.isNotEmpty()) "Edit" else "Add",
+                            text = if (showTotpField) stringResource(R.string.ui_hide_34d8b6) else if (totpSecret.isNotEmpty()) stringResource(R.string.ui_edit_530164) else stringResource(R.string.ui_add_61cc55),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary
                         )
@@ -717,13 +717,13 @@ fun AddEditPasswordScreen(
                             ) {
                                 Icon(
                                     imageVector = if (isValid) Icons.Default.Check else Icons.Default.Close,
-                                    contentDescription = if (isValid) "Valid" else "Invalid",
+                                    contentDescription = if (isValid) stringResource(R.string.ui_valid_a4aefa) else stringResource(R.string.ui_invalid_54e07a),
                                     tint = if (isValid) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
                                     modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = if (isValid) "Valid Base32 key" else "Invalid Base32 format",
+                                    text = if (isValid) stringResource(R.string.ui_valid_base32_key_944341) else stringResource(R.string.ui_invalid_base32_format_1789b2),
                                     color = if (isValid) MaterialTheme.colorScheme.primary
                                     else MaterialTheme.colorScheme.error,
                                     style = MaterialTheme.typography.bodySmall
@@ -764,7 +764,7 @@ fun AddEditPasswordScreen(
                 )
             ) {
                 Text(
-                    text = if (isEditing) "Update Password" else "Save Password",
+                    text = if (isEditing) stringResource(R.string.ui_update_password_61dcf3) else stringResource(R.string.ui_save_password_4e8ceb),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold
                 )

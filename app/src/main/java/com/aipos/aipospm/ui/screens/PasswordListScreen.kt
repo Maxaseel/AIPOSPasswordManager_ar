@@ -241,7 +241,7 @@ fun PasswordListContent(
                                 Box(modifier = Modifier.weight(1f)) {
                                     if (searchQuery.isEmpty()) {
                                         Text(
-                                            text = "Search passwords...",
+                                            text = stringResource(R.string.ui_search_passwords_33d307),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                                         )
@@ -417,10 +417,10 @@ fun PasswordListContent(
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = when {
-                            showCompromisedOnlyFilter -> "No compromised passwords!"
-                            showReusedOnlyFilter -> "No reused passwords!"
-                            searchQuery.isNotEmpty() || selectedCategoryIdFilter != null -> "No results found"
-                            else -> "No passwords saved yet"
+                            showCompromisedOnlyFilter -> stringResource(R.string.empty_no_compromised)
+                            showReusedOnlyFilter -> stringResource(R.string.empty_no_reused)
+                            searchQuery.isNotEmpty() || selectedCategoryIdFilter != null -> stringResource(R.string.empty_no_results)
+                            else -> stringResource(R.string.empty_no_passwords)
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
@@ -428,10 +428,10 @@ fun PasswordListContent(
                     )
                     Text(
                         text = when {
-                            showCompromisedOnlyFilter -> "All your saved passwords are clean and secure."
-                            showReusedOnlyFilter -> "All your saved passwords are unique across your accounts."
-                            searchQuery.isNotEmpty() || selectedCategoryIdFilter != null -> "Try a different search or filter"
-                            else -> "Tap the + button to add your first password"
+                            showCompromisedOnlyFilter -> stringResource(R.string.empty_passwords_clean)
+                            showReusedOnlyFilter -> stringResource(R.string.empty_passwords_unique)
+                            searchQuery.isNotEmpty() || selectedCategoryIdFilter != null -> stringResource(R.string.empty_try_search)
+                            else -> stringResource(R.string.empty_add_first_password)
                         },
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -468,14 +468,14 @@ fun PasswordListContent(
                         Column(modifier = Modifier.fillMaxWidth()) {
                             if (isFirstFavorite) {
                                 VaultSectionHeader(
-                                    title = "Favorites",
+                                    title = stringResource(R.string.ui_favorites_07b3e4),
                                     count = passwords.count { it.isFavorite },
                                     icon = Icons.Default.Star,
                                     tint = MaterialTheme.colorScheme.primary
                                 )
                             } else if (isFirstNonFavorite) {
                                 VaultSectionHeader(
-                                    title = "All Passwords",
+                                    title = stringResource(R.string.ui_all_passwords_4e60d6),
                                     count = passwords.count { !it.isFavorite },
                                     icon = Icons.Default.Password,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -490,7 +490,7 @@ fun PasswordListContent(
                                         passwordViewModel.deletePassword(entry)
                                         scope.launch {
                                             val result = snackbarHostState.showSnackbar(
-                                                message = "Password '${entry.title}' deleted",
+                                                message = context.getString(R.string.ui_password_deleted_9dcca4, entry.title),
                                                 actionLabel = "Undo"
                                             )
                                             if (result == SnackbarResult.ActionPerformed) {
@@ -557,7 +557,7 @@ fun PasswordListContent(
                                     onCopyUsername = {
                                         ClipboardHelper.copyAndScheduleClear(context, "Username", entry.username)
                                         scope.launch {
-                                            snackbarHostState.showSnackbar("Username copied (clears in 30s)")
+                                            snackbarHostState.showSnackbar(context.getString(R.string.ui_username_copied_clears_in_30s_8461b7))
                                         }
                                     },
                                     onMoveUp = if (canMoveUp) {
@@ -745,7 +745,7 @@ private fun PasswordCard(
                                     )
                                     Spacer(modifier = Modifier.width(3.dp))
                                     Text(
-                                        text = "Compromised",
+                                        text = stringResource(R.string.ui_compromised_acf32d),
                                         style = MaterialTheme.typography.labelSmall,
                                         color = DangerRed,
                                         fontWeight = FontWeight.Bold
@@ -771,7 +771,7 @@ private fun PasswordCard(
                                     )
                                     Spacer(modifier = Modifier.width(3.dp))
                                     Text(
-                                        text = "Reused",
+                                        text = stringResource(R.string.ui_reused_103b12),
                                         style = MaterialTheme.typography.labelSmall,
                                         color = WarningAmber,
                                         fontWeight = FontWeight.Bold
