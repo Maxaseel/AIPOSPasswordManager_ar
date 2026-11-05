@@ -411,6 +411,11 @@
     <string name="ui_successfully_imported_entries_6cac85">تم استيراد %1$s إدخال بنجاح</string>
     <string name="ui_suggested_fd55e9">مقترح: %1$s</string>
     <string name="ui_symbols">رموز (!@#$...)</string>
+    <string name="generator_hyphen">شرطة (-)</string>
+    <string name="generator_spaces">مسافات</string>
+    <string name="generator_underscore">شرطة سفلية (_)</string>
+    <string name="generator_extended_letters">أحرف لاتينية ممتدة (ñæ...)</string>
+    <string name="generator_brackets">أقواس (&lt;&gt; {} () [])</string>
     <string name="ui_tablet_fabcac">جهاز لوحي</string>
     <string name="ui_terminal_a1f52c">طرفية</string>
     <string name="ui_this_password_is_in_the_common_breac_0c087a">كلمة المرور هذه موجودة في قائمة كلمات المرور الشائعة/المخترقة. يوصى بشدة باختيار كلمة مرور أقوى.</string>

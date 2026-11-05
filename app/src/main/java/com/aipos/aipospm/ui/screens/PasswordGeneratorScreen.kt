@@ -330,6 +330,31 @@ fun PasswordGeneratorScreen(
                         checked = uiState.useSymbols,
                         onCheckedChange = { generatorViewModel.toggleSymbols(it) }
                     )
+                    ToggleRow(
+                        label = stringResource(R.string.generator_hyphen),
+                        checked = uiState.useHyphen,
+                        onCheckedChange = { generatorViewModel.toggleHyphen(it) }
+                    )
+                    ToggleRow(
+                        label = stringResource(R.string.generator_spaces),
+                        checked = uiState.useSpaces,
+                        onCheckedChange = { generatorViewModel.toggleSpaces(it) }
+                    )
+                    ToggleRow(
+                        label = stringResource(R.string.generator_underscore),
+                        checked = uiState.useUnderscore,
+                        onCheckedChange = { generatorViewModel.toggleUnderscore(it) }
+                    )
+                    ToggleRow(
+                        label = stringResource(R.string.generator_extended_letters),
+                        checked = uiState.useExtendedChars,
+                        onCheckedChange = { generatorViewModel.toggleExtendedChars(it) }
+                    )
+                    ToggleRow(
+                        label = stringResource(R.string.generator_brackets),
+                        checked = uiState.useBrackets,
+                        onCheckedChange = { generatorViewModel.toggleBrackets(it) }
+                    )
                 }
             }
 
