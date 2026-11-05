@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -50,6 +52,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aipos.aipospm.data.Category
 import com.aipos.aipospm.data.CategoryType
 import com.aipos.aipospm.ui.viewmodels.CategoryViewModel
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,8 +78,8 @@ fun CategoryManagerScreen(
     if (showLoadPresetsDialog) {
         AlertDialog(
             onDismissRequest = { showLoadPresetsDialog = false },
-            title = { Text("Load Category Presets") },
-            text = { Text("Add standard curated category presets for Passwords and API Keys? Any existing categories will be preserved.") },
+            title = { Text(stringResource(R.string.txt_load_category_presets_158e69)) },
+            text = { Text(stringResource(R.string.txt_add_standard_curated_category_presets_for__00a7b1)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -84,12 +87,12 @@ fun CategoryManagerScreen(
                         showLoadPresetsDialog = false
                     }
                 ) {
-                    Text("Load Presets")
+                    Text(stringResource(R.string.txt_load_presets_e9dc81))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showLoadPresetsDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -99,13 +102,13 @@ fun CategoryManagerScreen(
     if (categoryToRename != null) {
         AlertDialog(
             onDismissRequest = { categoryToRename = null },
-            title = { Text("Rename Category") },
+            title = { Text(stringResource(R.string.txt_rename_category_480fbe)) },
             text = {
                 Column {
                     OutlinedTextField(
                         value = renameNewName,
                         onValueChange = { renameNewName = it },
-                        label = { Text("Category Name") },
+                        label = { Text(stringResource(R.string.txt_category_name_912f07)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -121,12 +124,12 @@ fun CategoryManagerScreen(
                     },
                     enabled = renameNewName.trim().isNotEmpty()
                 ) {
-                    Text("Rename")
+                    Text(stringResource(R.string.txt_rename_d3f4cb))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { categoryToRename = null }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -136,8 +139,8 @@ fun CategoryManagerScreen(
     if (categoryToDelete != null) {
         AlertDialog(
             onDismissRequest = { categoryToDelete = null },
-            title = { Text("Delete Category") },
-            text = { Text("Are you sure you want to delete the category \"${categoryToDelete?.name}\"? Passwords/Keys in this category will be kept, but set to uncategorized.") },
+            title = { Text(stringResource(R.string.txt_delete_category_ea9ac9)) },
+            text = { Text(stringResource(R.string.txt_delete_category_confirm, categoryToDelete?.name.orEmpty())) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -147,12 +150,12 @@ fun CategoryManagerScreen(
                         categoryToDelete = null
                     }
                 ) {
-                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.txt_delete_f6fdbe), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { categoryToDelete = null }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -161,17 +164,17 @@ fun CategoryManagerScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Manage Categories", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_manage_categories_9a3491), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 actions = {
                     IconButton(onClick = { showLoadPresetsDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.AutoAwesome,
-                            contentDescription = "Load Presets",
+                            contentDescription = stringResource(R.string.txt_load_presets_e9dc81),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -199,12 +202,12 @@ fun CategoryManagerScreen(
                 Tab(
                     selected = selectedType == CategoryType.PASSWORD,
                     onClick = { selectedType = CategoryType.PASSWORD },
-                    text = { Text("Passwords (${passwordCategories.size})", fontWeight = FontWeight.SemiBold) }
+                    text = { Text(stringResource(R.string.txt_passwords_count, passwordCategories.size), fontWeight = FontWeight.SemiBold) }
                 )
                 Tab(
                     selected = selectedType == CategoryType.API_KEY,
                     onClick = { selectedType = CategoryType.API_KEY },
-                    text = { Text("API Keys (${apiKeyCategories.size})", fontWeight = FontWeight.SemiBold) }
+                    text = { Text(stringResource(R.string.txt_api_keys_count, apiKeyCategories.size), fontWeight = FontWeight.SemiBold) }
                 )
             }
 
@@ -225,7 +228,7 @@ fun CategoryManagerScreen(
                     OutlinedTextField(
                         value = newCategoryName,
                         onValueChange = { newCategoryName = it },
-                        placeholder = { Text(if (selectedType == CategoryType.PASSWORD) "New password category..." else "New API key category...") },
+                        placeholder = { Text(stringResource(if (selectedType == CategoryType.PASSWORD) R.string.txt_new_password_category else R.string.txt_new_api_key_category)) },
                         singleLine = true,
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(12.dp)
@@ -245,7 +248,7 @@ fun CategoryManagerScreen(
                         ) {
                             Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("Add")
+                            Text(stringResource(R.string.txt_add_61cc55))
                         }
                     }
                 }
@@ -315,14 +318,14 @@ fun CategoryManagerScreen(
                                     IconButton(onClick = { categoryToRename = category }) {
                                         Icon(
                                             imageVector = Icons.Default.Edit,
-                                            contentDescription = "Rename",
+                                            contentDescription = stringResource(R.string.txt_rename_d3f4cb),
                                             tint = MaterialTheme.colorScheme.outline
                                         )
                                     }
                                     IconButton(onClick = { categoryToDelete = category }) {
                                         Icon(
                                             imageVector = Icons.Default.Delete,
-                                            contentDescription = "Delete",
+                                            contentDescription = stringResource(R.string.txt_delete_f6fdbe),
                                             tint = MaterialTheme.colorScheme.error
                                         )
                                     }

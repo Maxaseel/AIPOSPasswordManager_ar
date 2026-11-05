@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -76,6 +78,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aipos.aipospm.ui.viewmodels.ApiKeyViewModel
 import com.aipos.aipospm.ui.viewmodels.CategoryViewModel
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -144,12 +147,12 @@ fun AddEditApiKeyScreen(
     if (showCreateCategoryDialog) {
         AlertDialog(
             onDismissRequest = { showCreateCategoryDialog = false },
-            title = { Text("New Category") },
+            title = { Text(stringResource(R.string.txt_new_category_309531)) },
             text = {
                 OutlinedTextField(
                     value = newCatName,
                     onValueChange = { newCatName = it },
-                    label = { Text("Category Name") },
+                    label = { Text(stringResource(R.string.txt_category_name_912f07)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
@@ -171,12 +174,12 @@ fun AddEditApiKeyScreen(
                         showCreateCategoryDialog = false
                     }
                 ) {
-                    Text("Create")
+                    Text(stringResource(R.string.txt_create_6e157c))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCreateCategoryDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -193,7 +196,7 @@ fun AddEditApiKeyScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 actions = {
@@ -201,7 +204,7 @@ fun AddEditApiKeyScreen(
                         Icon(
                             imageVector = if (isFavorite) Icons.Default.Star
                             else Icons.Default.StarBorder,
-                            contentDescription = "Favorite",
+                            contentDescription = stringResource(R.string.txt_favorite_6b90b6),
                             tint = if (isFavorite) MaterialTheme.colorScheme.secondary
                             else MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -287,7 +290,7 @@ fun AddEditApiKeyScreen(
                         onClick = { showIconPicker = true },
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text("Choose")
+                        Text(stringResource(R.string.txt_choose_78b7c9))
                     }
 
                     if (iconId != null) {
@@ -298,7 +301,7 @@ fun AddEditApiKeyScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = "Reset Icon",
+                                contentDescription = stringResource(R.string.txt_reset_icon_96ca97),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.size(18.dp)
                             )
@@ -312,8 +315,8 @@ fun AddEditApiKeyScreen(
             OutlinedTextField(
                 value = serviceName,
                 onValueChange = { serviceName = it },
-                label = { Text("Service Name *") },
-                placeholder = { Text("e.g., OpenAI, Stripe, AWS") },
+                label = { Text(stringResource(R.string.txt_service_name_13f58b)) },
+                placeholder = { Text(stringResource(R.string.txt_e_g_openai_stripe_aws_a284fa)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -333,14 +336,14 @@ fun AddEditApiKeyScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Category: $selectedCategoryName")
+                        Text(stringResource(R.string.txt_category_named, selectedCategoryName))
                     }
                     DropdownMenu(
                         expanded = dropdownExpanded,
                         onDismissRequest = { dropdownExpanded = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("None") },
+                            text = { Text(stringResource(R.string.txt_none_6eef66)) },
                             onClick = {
                                 selectedCategoryId = null
                                 dropdownExpanded = false
@@ -364,7 +367,7 @@ fun AddEditApiKeyScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Create Category",
+                        contentDescription = stringResource(R.string.txt_create_category_9096c2),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -434,7 +437,7 @@ fun AddEditApiKeyScreen(
             OutlinedTextField(
                 value = apiKey,
                 onValueChange = { apiKey = it },
-                label = { Text("API Key *") },
+                label = { Text(stringResource(R.string.txt_api_key_2019bd)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = if (keyVisible) VisualTransformation.None
@@ -456,8 +459,8 @@ fun AddEditApiKeyScreen(
             OutlinedTextField(
                 value = notes,
                 onValueChange = { notes = it },
-                label = { Text("Notes") },
-                placeholder = { Text("Description, environment, etc.") },
+                label = { Text(stringResource(R.string.txt_notes_704400)) },
+                placeholder = { Text(stringResource(R.string.txt_description_environment_etc_0e43cf)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp),

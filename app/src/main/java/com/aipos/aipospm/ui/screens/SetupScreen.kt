@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -66,6 +68,7 @@ import com.aipos.aipospm.ui.theme.SecurityGreen
 import com.aipos.aipospm.ui.theme.WarningAmber
 import com.aipos.aipospm.ui.viewmodels.AuthViewModel
 import com.aipos.aipospm.ui.viewmodels.PasswordStrength
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun SetupScreen(
@@ -161,7 +164,7 @@ fun SetupScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Shield,
-                            contentDescription = "Security",
+                            contentDescription = stringResource(R.string.txt_security_f25ce1),
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
@@ -222,7 +225,7 @@ fun SetupScreen(
                                 contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                             )
                         ) {
-                            Text("Copy Key")
+                            Text(stringResource(R.string.txt_copy_key_89dcf0))
                         }
                     }
                 }
@@ -242,7 +245,7 @@ fun SetupScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Shield,
-                            contentDescription = "Warning",
+                            contentDescription = stringResource(R.string.txt_warning_e9c455),
                             tint = MaterialTheme.colorScheme.error,
                             modifier = Modifier.size(24.dp)
                         )
@@ -307,7 +310,7 @@ fun SetupScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Shield,
-                            contentDescription = "Security",
+                            contentDescription = stringResource(R.string.txt_security_f25ce1),
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
@@ -352,7 +355,7 @@ fun SetupScreen(
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Master Password") },
+                    label = { Text(stringResource(R.string.txt_master_password_5654ce)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     visualTransformation = if (passwordVisible) VisualTransformation.None
@@ -426,7 +429,7 @@ fun SetupScreen(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Shield,
-                                    contentDescription = "Warning",
+                                    contentDescription = stringResource(R.string.txt_warning_e9c455),
                                     tint = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -447,7 +450,7 @@ fun SetupScreen(
                 OutlinedTextField(
                     value = confirmPassword,
                     onValueChange = { confirmPassword = it },
-                    label = { Text("Confirm Password") },
+                    label = { Text(stringResource(R.string.txt_confirm_password_c2d404)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     visualTransformation = if (confirmVisible) VisualTransformation.None

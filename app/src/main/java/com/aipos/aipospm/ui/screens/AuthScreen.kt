@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -70,6 +72,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aipos.aipospm.ui.viewmodels.AuthViewModel
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun AuthScreen(
@@ -219,7 +222,7 @@ fun AuthScreen(
                     OutlinedTextField(
                         value = password,
                         onValueChange = { password = it },
-                        label = { Text("Master Password") },
+                        label = { Text(stringResource(R.string.txt_master_password_5654ce)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (passwordVisible) VisualTransformation.None
@@ -280,7 +283,7 @@ fun AuthScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Fingerprint,
-                                contentDescription = "Biometric",
+                                contentDescription = stringResource(R.string.txt_biometric_36c991),
                                 modifier = Modifier.size(24.dp)
                             )
                             Spacer(modifier = Modifier.padding(horizontal = 4.dp))
@@ -298,7 +301,7 @@ fun AuthScreen(
                     onClick = { showRecoveryDialog = true },
                     modifier = Modifier.padding(top = 12.dp)
                 ) {
-                    Text("Forgot Password? Reset Vault")
+                    Text(stringResource(R.string.txt_forgot_password_reset_vault_078340))
                 }
             }
 
@@ -336,7 +339,7 @@ fun AuthScreen(
 
         AlertDialog(
             onDismissRequest = { showRecoveryDialog = false },
-            title = { Text("Reset Master Password") },
+            title = { Text(stringResource(R.string.txt_reset_master_password_f192e4)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text(
@@ -346,8 +349,8 @@ fun AuthScreen(
                     OutlinedTextField(
                         value = recoveryKeyInput,
                         onValueChange = { recoveryKeyInput = it },
-                        label = { Text("Recovery Key") },
-                        placeholder = { Text("AIPOS-XXXX-XXXX-XXXX-XXXX") },
+                        label = { Text(stringResource(R.string.txt_recovery_key_780fbb)) },
+                        placeholder = { Text(stringResource(R.string.txt_aipos_xxxx_xxxx_xxxx_xxxx_4cb802)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
@@ -355,7 +358,7 @@ fun AuthScreen(
                     OutlinedTextField(
                         value = newRecoveryPassword,
                         onValueChange = { newRecoveryPassword = it },
-                        label = { Text("New Master Password") },
+                        label = { Text(stringResource(R.string.txt_new_master_password_df53e6)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (newPwVisible) VisualTransformation.None
@@ -374,7 +377,7 @@ fun AuthScreen(
                     OutlinedTextField(
                         value = confirmRecoveryPassword,
                         onValueChange = { confirmRecoveryPassword = it },
-                        label = { Text("Confirm New Password") },
+                        label = { Text(stringResource(R.string.txt_confirm_new_password_68dcd7)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (confirmPwVisible) VisualTransformation.None
@@ -422,12 +425,12 @@ fun AuthScreen(
                     },
                     enabled = recoveryKeyInput.isNotBlank() && newRecoveryPassword.isNotBlank() && confirmRecoveryPassword.isNotBlank()
                 ) {
-                    Text("Reset Vault")
+                    Text(stringResource(R.string.txt_reset_vault_59c5db))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showRecoveryDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )

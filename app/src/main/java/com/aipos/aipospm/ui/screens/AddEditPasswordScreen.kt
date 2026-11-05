@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import com.aipos.aipospm.MainActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -97,6 +99,7 @@ import com.aipos.aipospm.ui.components.CameraPreview
 import com.aipos.aipospm.ui.viewmodels.CategoryViewModel
 import com.aipos.aipospm.ui.viewmodels.PasswordViewModel
 import com.aipos.aipospm.ui.viewmodels.PasswordGeneratorViewModel
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -219,12 +222,12 @@ fun AddEditPasswordScreen(
     if (showCreateCategoryDialog) {
         AlertDialog(
             onDismissRequest = { showCreateCategoryDialog = false },
-            title = { Text("New Category") },
+            title = { Text(stringResource(R.string.txt_new_category_309531)) },
             text = {
                 OutlinedTextField(
                     value = newCatName,
                     onValueChange = { newCatName = it },
-                    label = { Text("Category Name") },
+                    label = { Text(stringResource(R.string.txt_category_name_912f07)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
@@ -246,12 +249,12 @@ fun AddEditPasswordScreen(
                         showCreateCategoryDialog = false
                     }
                 ) {
-                    Text("Create")
+                    Text(stringResource(R.string.txt_create_6e157c))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCreateCategoryDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -268,7 +271,7 @@ fun AddEditPasswordScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 actions = {
@@ -276,7 +279,7 @@ fun AddEditPasswordScreen(
                         Icon(
                             imageVector = if (isFavorite) Icons.Default.Star
                             else Icons.Default.StarBorder,
-                            contentDescription = "Favorite",
+                            contentDescription = stringResource(R.string.txt_favorite_6b90b6),
                             tint = if (isFavorite) MaterialTheme.colorScheme.primary
                             else MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -378,7 +381,7 @@ fun AddEditPasswordScreen(
                         onClick = { showIconPicker = true },
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text("Choose")
+                        Text(stringResource(R.string.txt_choose_78b7c9))
                     }
 
                     if (iconId != null) {
@@ -389,7 +392,7 @@ fun AddEditPasswordScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = "Reset Icon",
+                                contentDescription = stringResource(R.string.txt_reset_icon_96ca97),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.size(18.dp)
                             )
@@ -403,8 +406,8 @@ fun AddEditPasswordScreen(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Title *") },
-                placeholder = { Text("e.g., Google, GitHub") },
+                label = { Text(stringResource(R.string.txt_title_961697)) },
+                placeholder = { Text(stringResource(R.string.txt_e_g_google_github_8ac8b4)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -424,14 +427,14 @@ fun AddEditPasswordScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Category: $selectedCategoryName")
+                        Text(stringResource(R.string.txt_category_named, selectedCategoryName))
                     }
                     DropdownMenu(
                         expanded = dropdownExpanded,
                         onDismissRequest = { dropdownExpanded = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("None") },
+                            text = { Text(stringResource(R.string.txt_none_6eef66)) },
                             onClick = {
                                 selectedCategoryId = null
                                 dropdownExpanded = false
@@ -455,7 +458,7 @@ fun AddEditPasswordScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Create Category",
+                        contentDescription = stringResource(R.string.txt_create_category_9096c2),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -525,7 +528,7 @@ fun AddEditPasswordScreen(
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text("Username / Email *") },
+                label = { Text(stringResource(R.string.txt_username_email_8a55d7)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -536,7 +539,7 @@ fun AddEditPasswordScreen(
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password *") },
+                label = { Text(stringResource(R.string.txt_password_7cc239)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = if (passwordVisible) VisualTransformation.None
@@ -561,7 +564,7 @@ fun AddEditPasswordScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Warning,
-                        contentDescription = "Warning",
+                        contentDescription = stringResource(R.string.txt_warning_e9c455),
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(16.dp)
                     )
@@ -595,7 +598,7 @@ fun AddEditPasswordScreen(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Generate Password")
+                    Text(stringResource(R.string.txt_generate_password_3aea0b))
                 }
 
                 if (onNavigateToGenerator != null) {
@@ -605,7 +608,7 @@ fun AddEditPasswordScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Tune,
-                            contentDescription = "Customize generator options",
+                            contentDescription = stringResource(R.string.txt_customize_generator_options_3e238d),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.size(20.dp)
                         )
@@ -618,8 +621,8 @@ fun AddEditPasswordScreen(
             OutlinedTextField(
                 value = url,
                 onValueChange = { url = it },
-                label = { Text("Website URL") },
-                placeholder = { Text("https://example.com") },
+                label = { Text(stringResource(R.string.txt_website_url_b32233)) },
+                placeholder = { Text(stringResource(R.string.txt_https_example_com_327c3f)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -630,7 +633,7 @@ fun AddEditPasswordScreen(
             OutlinedTextField(
                 value = notes,
                 onValueChange = { notes = it },
-                label = { Text("Notes") },
+                label = { Text(stringResource(R.string.txt_notes_704400)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp),
@@ -679,8 +682,8 @@ fun AddEditPasswordScreen(
                         OutlinedTextField(
                             value = totpSecret,
                             onValueChange = { totpSecret = it },
-                            label = { Text("TOTP Secret Key (Base32)") },
-                            placeholder = { Text("e.g., JBSW43DPEHPK3PXP") },
+                            label = { Text(stringResource(R.string.txt_totp_secret_key_base32_a028f7)) },
+                            placeholder = { Text(stringResource(R.string.txt_e_g_jbsw43dpehpk3pxp_b58fcb)) },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             trailingIcon = {
@@ -700,7 +703,7 @@ fun AddEditPasswordScreen(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.QrCodeScanner,
-                                        contentDescription = "Scan QR Code"
+                                        contentDescription = stringResource(R.string.txt_scan_qr_code_04e3f1)
                                     )
                                 }
                             },
@@ -774,7 +777,7 @@ fun AddEditPasswordScreen(
     if (showScanner) {
         AlertDialog(
             onDismissRequest = { showScanner = false },
-            title = { Text("Scan TOTP QR Code") },
+            title = { Text(stringResource(R.string.txt_scan_totp_qr_code_f7945c)) },
             text = {
                 Box(
                     modifier = Modifier
@@ -812,7 +815,7 @@ fun AddEditPasswordScreen(
             confirmButton = {},
             dismissButton = {
                 TextButton(onClick = { showScanner = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )

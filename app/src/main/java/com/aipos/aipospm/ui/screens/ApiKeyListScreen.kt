@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import android.content.ClipData
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -96,6 +98,7 @@ import com.aipos.aipospm.ui.components.bounceClick
 import com.aipos.aipospm.ui.components.pressScale
 import com.aipos.aipospm.security.ClipboardHelper
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -111,10 +114,10 @@ fun ApiKeyListScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("API Keys", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_api_keys_e18ffc), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -132,7 +135,7 @@ fun ApiKeyListScreen(
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier.pressScale(interactionSource)
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add API Key")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.txt_add_api_key_14b400))
             }
         }
     ) { padding ->
@@ -216,7 +219,7 @@ fun ApiKeyListContent(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Search,
-                                    contentDescription = "Search",
+                                    contentDescription = stringResource(R.string.txt_search_bce064),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -238,7 +241,7 @@ fun ApiKeyListContent(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Default.Clear,
-                                            contentDescription = "Clear",
+                                            contentDescription = stringResource(R.string.txt_clear_719ea3),
                                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
@@ -261,7 +264,7 @@ fun ApiKeyListContent(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.Sort,
-                        contentDescription = "Sort API Keys",
+                        contentDescription = stringResource(R.string.txt_sort_api_keys_2ca0b1),
                         tint = if (sortOption != SortOption.UPDATED_DESC || pinFavorites)
                             MaterialTheme.colorScheme.onSecondaryContainer
                         else MaterialTheme.colorScheme.onSurfaceVariant
@@ -280,7 +283,7 @@ fun ApiKeyListContent(
                     FilterChip(
                         selected = selectedCategoryIdFilter == null,
                         onClick = { apiKeyViewModel.selectCategoryFilter(null) },
-                        label = { Text("All") }
+                        label = { Text(stringResource(R.string.txt_all_6a7208)) }
                     )
                 }
                 items(categories, key = { it.id }) { category ->
@@ -403,7 +406,7 @@ fun ApiKeyListContent(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Default.Delete,
-                                            contentDescription = "Delete",
+                                            contentDescription = stringResource(R.string.txt_delete_f6fdbe),
                                             tint = DangerRed,
                                             modifier = Modifier
                                                 .padding(end = 16.dp)
@@ -562,7 +565,7 @@ private fun ApiKeyCard(
                 IconButton(onClick = onCopyName, modifier = Modifier.size(36.dp)) {
                     Icon(
                         imageVector = Icons.Default.ContentCopy,
-                        contentDescription = "Copy",
+                        contentDescription = stringResource(R.string.txt_copy_af74f7),
                         modifier = Modifier.size(18.dp),
                         tint = MaterialTheme.colorScheme.outline
                     )
@@ -572,7 +575,7 @@ private fun ApiKeyCard(
                     Icon(
                         imageVector = if (entry.isFavorite) Icons.Default.Star
                         else Icons.Default.StarBorder,
-                        contentDescription = "Favorite",
+                        contentDescription = stringResource(R.string.txt_favorite_6b90b6),
                         modifier = Modifier.size(18.dp),
                         tint = if (entry.isFavorite) MaterialTheme.colorScheme.secondary
                         else MaterialTheme.colorScheme.outline
@@ -591,7 +594,7 @@ private fun ApiKeyCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowUp,
-                                contentDescription = "Move up",
+                                contentDescription = stringResource(R.string.txt_move_up_b4f57c),
                                 modifier = Modifier.size(18.dp),
                                 tint = if (onMoveUp != null) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                             )
@@ -603,7 +606,7 @@ private fun ApiKeyCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowDown,
-                                contentDescription = "Move down",
+                                contentDescription = stringResource(R.string.txt_move_down_260ff8),
                                 modifier = Modifier.size(18.dp),
                                 tint = if (onMoveDown != null) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                             )

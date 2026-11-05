@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import android.content.ClipData
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -104,6 +106,7 @@ import com.aipos.aipospm.ui.components.bounceClick
 import com.aipos.aipospm.ui.components.pressScale
 import com.aipos.aipospm.security.ClipboardHelper
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,10 +122,10 @@ fun PasswordListScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("Passwords", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_passwords_02c830), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -140,7 +143,7 @@ fun PasswordListScreen(
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier.pressScale(interactionSource)
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add Password")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.txt_add_password_6e19a6))
             }
         }
     ) { padding ->
@@ -230,7 +233,7 @@ fun PasswordListContent(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Search,
-                                    contentDescription = "Search",
+                                    contentDescription = stringResource(R.string.txt_search_bce064),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -252,7 +255,7 @@ fun PasswordListContent(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Default.Clear,
-                                            contentDescription = "Clear",
+                                            contentDescription = stringResource(R.string.txt_clear_719ea3),
                                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
@@ -275,7 +278,7 @@ fun PasswordListContent(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.Sort,
-                        contentDescription = "Sort Passwords",
+                        contentDescription = stringResource(R.string.txt_sort_passwords_0da6e8),
                         tint = if (sortOption != SortOption.UPDATED_DESC || pinFavorites)
                             MaterialTheme.colorScheme.onPrimaryContainer
                         else MaterialTheme.colorScheme.onSurfaceVariant
@@ -297,7 +300,7 @@ fun PasswordListContent(
                             onClick = {
                                 passwordViewModel.setShowCompromisedOnlyFilter(!showCompromisedOnlyFilter)
                             },
-                            label = { Text("Compromised ($breachedPasswordCount)") },
+                            label = { Text(stringResource(R.string.txt_compromised_count, breachedPasswordCount)) },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Default.Shield,
@@ -327,7 +330,7 @@ fun PasswordListContent(
                             onClick = {
                                 passwordViewModel.setShowReusedOnlyFilter(!showReusedOnlyFilter)
                             },
-                            label = { Text("Reused ($reusedPasswordCount)") },
+                            label = { Text(stringResource(R.string.txt_reused_count, reusedPasswordCount)) },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Default.Repeat,
@@ -358,7 +361,7 @@ fun PasswordListContent(
                             passwordViewModel.setShowReusedOnlyFilter(false)
                             passwordViewModel.selectCategoryFilter(null)
                         },
-                        label = { Text("All") }
+                        label = { Text(stringResource(R.string.txt_all_6a7208)) }
                     )
                 }
                 items(categories, key = { it.id }) { category ->
@@ -443,7 +446,7 @@ fun PasswordListContent(
                                 passwordViewModel.setShowReusedOnlyFilter(false)
                             }
                         ) {
-                            Text("Show All Passwords")
+                            Text(stringResource(R.string.txt_show_all_passwords_4ba392))
                         }
                     }
                 }
@@ -520,7 +523,7 @@ fun PasswordListContent(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Default.Delete,
-                                            contentDescription = "Delete",
+                                            contentDescription = stringResource(R.string.txt_delete_f6fdbe),
                                             tint = DangerRed,
                                             modifier = Modifier
                                                 .padding(end = 16.dp)
@@ -656,7 +659,7 @@ private fun PasswordCard(
                             isBreached -> {
                                 Icon(
                                     imageVector = Icons.Default.Shield,
-                                    contentDescription = "Breached",
+                                    contentDescription = stringResource(R.string.txt_breached_e24f1b),
                                     tint = DangerRed,
                                     modifier = Modifier.size(22.dp)
                                 )
@@ -664,7 +667,7 @@ private fun PasswordCard(
                             isReused -> {
                                 Icon(
                                     imageVector = Icons.Default.Repeat,
-                                    contentDescription = "Reused",
+                                    contentDescription = stringResource(R.string.txt_reused_103b12),
                                     tint = WarningAmber,
                                     modifier = Modifier.size(22.dp)
                                 )
@@ -800,7 +803,7 @@ private fun PasswordCard(
                 IconButton(onClick = onCopyUsername, modifier = Modifier.size(36.dp)) {
                     Icon(
                         imageVector = Icons.Default.ContentCopy,
-                        contentDescription = "Copy username",
+                        contentDescription = stringResource(R.string.txt_copy_username_872e64),
                         modifier = Modifier.size(18.dp),
                         tint = MaterialTheme.colorScheme.outline
                     )
@@ -810,7 +813,7 @@ private fun PasswordCard(
                     Icon(
                         imageVector = if (entry.isFavorite) Icons.Default.Star
                         else Icons.Default.StarBorder,
-                        contentDescription = "Favorite",
+                        contentDescription = stringResource(R.string.txt_favorite_6b90b6),
                         modifier = Modifier.size(18.dp),
                         tint = if (entry.isFavorite) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.outline
@@ -829,7 +832,7 @@ private fun PasswordCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowUp,
-                                contentDescription = "Move up",
+                                contentDescription = stringResource(R.string.txt_move_up_b4f57c),
                                 modifier = Modifier.size(18.dp),
                                 tint = if (onMoveUp != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                             )
@@ -841,7 +844,7 @@ private fun PasswordCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowDown,
-                                contentDescription = "Move down",
+                                contentDescription = stringResource(R.string.txt_move_down_260ff8),
                                 modifier = Modifier.size(18.dp),
                                 tint = if (onMoveDown != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                             )

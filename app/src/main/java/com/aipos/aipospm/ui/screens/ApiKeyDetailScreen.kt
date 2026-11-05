@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -68,6 +70,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -112,8 +115,8 @@ fun ApiKeyDetailScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Move to Trash?") },
-            text = { Text("Are you sure you want to move \"${entry?.serviceName}\" to the Trash? You can restore it within 30 days.") },
+            title = { Text(stringResource(R.string.txt_move_to_trash_dc2931)) },
+            text = { Text(stringResource(R.string.txt_move_item_to_trash, entry?.serviceName.orEmpty())) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -125,12 +128,12 @@ fun ApiKeyDetailScreen(
                         showDeleteDialog = false
                     }
                 ) {
-                    Text("Move to Trash", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.txt_move_to_trash_dffd3b), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -139,23 +142,23 @@ fun ApiKeyDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("API Key Details", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_api_key_details_0738e6), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = {
                         apiKeyViewModel.clearSelection()
                         onNavigateBack()
                     }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 actions = {
                     IconButton(onClick = { entry?.id?.let { onNavigateToEdit(it) } }) {
-                        Icon(Icons.Default.Edit, contentDescription = "Edit")
+                        Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.txt_edit_530164))
                     }
                     IconButton(onClick = { showDeleteDialog = true }) {
                         Icon(
                             Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = stringResource(R.string.txt_delete_f6fdbe),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -178,15 +181,15 @@ fun ApiKeyDetailScreen(
                 if (uiState.isLoading) {
                     CircularProgressIndicator()
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("Loading API key...", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.txt_loading_api_key_8e8f36), style = MaterialTheme.typography.bodyLarge)
                 } else {
-                    Text("API key not found", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.txt_api_key_not_found_02d56b), style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
                     Button(onClick = {
                         apiKeyViewModel.clearSelection()
                         onNavigateBack()
                     }) {
-                        Text("Go Back")
+                        Text(stringResource(R.string.txt_go_back_f03e2d))
                     }
                 }
             }
@@ -261,7 +264,7 @@ fun ApiKeyDetailScreen(
                         if (entry.isFavorite) {
                             Icon(
                                 imageVector = Icons.Default.Star,
-                                contentDescription = "Favorite",
+                                contentDescription = stringResource(R.string.txt_favorite_6b90b6),
                                 tint = MaterialTheme.colorScheme.onSecondaryContainer,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -379,7 +382,7 @@ fun ApiKeyDetailScreen(
                     ) {
                         Icon(Icons.Default.Edit, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Edit")
+                        Text(stringResource(R.string.txt_edit_530164))
                     }
                     OutlinedButton(
                         onClick = { showDeleteDialog = true },
@@ -393,7 +396,7 @@ fun ApiKeyDetailScreen(
                             tint = MaterialTheme.colorScheme.error
                         )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Delete", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.txt_delete_f6fdbe), color = MaterialTheme.colorScheme.error)
                     }
                 }
 

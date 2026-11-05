@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import android.content.Intent
 import com.aipos.aipospm.MainActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -83,6 +85,7 @@ import com.aipos.aipospm.ui.viewmodels.AuthViewModel
 import com.aipos.aipospm.ui.viewmodels.CategoryViewModel
 import com.aipos.aipospm.ui.viewmodels.PasswordViewModel
 import kotlinx.coroutines.launch
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -257,7 +260,7 @@ fun SettingsScreen(
                     confirmBackupPasswordToSet = ""
                 }
             },
-            title = { Text("Set Backup Password") },
+            title = { Text(stringResource(R.string.txt_set_backup_password_3b967a)) },
             text = {
                 Column {
                     Text(
@@ -268,7 +271,7 @@ fun SettingsScreen(
                     OutlinedTextField(
                         value = backupPasswordToSet,
                         onValueChange = { backupPasswordToSet = it },
-                        label = { Text("Backup Password") },
+                        label = { Text(stringResource(R.string.txt_backup_password_f6bc21)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (backupPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -286,7 +289,7 @@ fun SettingsScreen(
                     OutlinedTextField(
                         value = confirmBackupPasswordToSet,
                         onValueChange = { confirmBackupPasswordToSet = it },
-                        label = { Text("Confirm Backup Password") },
+                        label = { Text(stringResource(R.string.txt_confirm_backup_password_462305)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (confirmBackupPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -301,7 +304,7 @@ fun SettingsScreen(
                         isError = confirmBackupPasswordToSet.isNotEmpty() && !passwordsMatch,
                         supportingText = {
                             if (confirmBackupPasswordToSet.isNotEmpty() && !passwordsMatch) {
-                                Text("Passwords do not match", color = MaterialTheme.colorScheme.error)
+                                Text(stringResource(R.string.txt_passwords_do_not_match_d69c3b), color = MaterialTheme.colorScheme.error)
                             }
                         },
                         shape = RoundedCornerShape(12.dp)
@@ -320,7 +323,7 @@ fun SettingsScreen(
                     },
                     enabled = passwordsMatch && !isBackupInProgress
                 ) {
-                    Text("Save to File")
+                    Text(stringResource(R.string.txt_save_to_file_c8294a))
                 }
             },
             dismissButton = {
@@ -332,7 +335,7 @@ fun SettingsScreen(
                     },
                     enabled = !isBackupInProgress
                 ) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -342,7 +345,7 @@ fun SettingsScreen(
     if (showEnterBackupPasswordDialog) {
         AlertDialog(
             onDismissRequest = { if (!isBackupInProgress) showEnterBackupPasswordDialog = false },
-            title = { Text("Enter Backup Password") },
+            title = { Text(stringResource(R.string.txt_enter_backup_password_4b9aa1)) },
             text = {
                 Column {
                     Text(
@@ -353,7 +356,7 @@ fun SettingsScreen(
                     OutlinedTextField(
                         value = backupPasswordToEnter,
                         onValueChange = { backupPasswordToEnter = it },
-                        label = { Text("Backup Password") },
+                        label = { Text(stringResource(R.string.txt_backup_password_f6bc21)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (backupPasswordToEnterVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -400,7 +403,7 @@ fun SettingsScreen(
                     },
                     enabled = backupPasswordToEnter.isNotEmpty() && !isBackupInProgress
                 ) {
-                    Text("Restore")
+                    Text(stringResource(R.string.txt_restore_3cbe6d))
                 }
             },
             dismissButton = {
@@ -412,7 +415,7 @@ fun SettingsScreen(
                     },
                     enabled = !isBackupInProgress
                 ) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -421,10 +424,10 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_settings_c7f73b), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -682,7 +685,7 @@ fun SettingsScreen(
 
                     Icon(
                         imageVector = Icons.Default.Settings,
-                        contentDescription = "Configure Autofill",
+                        contentDescription = stringResource(R.string.txt_configure_autofill_0141f5),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp)
                     )
@@ -719,7 +722,7 @@ fun SettingsScreen(
                         OutlinedTextField(
                             value = currentPassword,
                             onValueChange = { currentPassword = it },
-                            label = { Text("Current Password") },
+                            label = { Text(stringResource(R.string.txt_current_password_4d5967)) },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             visualTransformation = if (currentPasswordVisible) VisualTransformation.None
@@ -743,7 +746,7 @@ fun SettingsScreen(
                         OutlinedTextField(
                             value = newPassword,
                             onValueChange = { newPassword = it },
-                            label = { Text("New Password") },
+                            label = { Text(stringResource(R.string.txt_new_password_4894cb)) },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             visualTransformation = if (newPasswordVisible) VisualTransformation.None
@@ -767,7 +770,7 @@ fun SettingsScreen(
                         OutlinedTextField(
                             value = confirmNewPassword,
                             onValueChange = { confirmNewPassword = it },
-                            label = { Text("Confirm New Password") },
+                            label = { Text(stringResource(R.string.txt_confirm_new_password_68dcd7)) },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             visualTransformation = PasswordVisualTransformation(),
@@ -804,7 +807,7 @@ fun SettingsScreen(
                                 containerColor = MaterialTheme.colorScheme.primary
                             )
                         ) {
-                            Text("Change Password")
+                            Text(stringResource(R.string.txt_change_password_49289d))
                         }
                     }
                 }
@@ -1009,7 +1012,7 @@ fun SettingsScreen(
                             shape = RoundedCornerShape(12.dp),
                             enabled = !isBackupInProgress
                         ) {
-                            Text(if (isBackupInProgress) "Working..." else "Export Backup")
+                            Text(stringResource(if (isBackupInProgress) R.string.txt_working else R.string.txt_export_backup))
                         }
                         OutlinedButton(
                             onClick = {
@@ -1021,7 +1024,7 @@ fun SettingsScreen(
                             shape = RoundedCornerShape(12.dp),
                             enabled = !isBackupInProgress
                         ) {
-                            Text(if (isBackupInProgress) "Working..." else "Import Backup")
+                            Text(stringResource(if (isBackupInProgress) R.string.txt_working else R.string.txt_import_backup))
                         }
                     }
                 }
@@ -1059,7 +1062,7 @@ fun SettingsScreen(
                         modifier = Modifier.fillMaxWidth().pressScale(csvImportBtnInteractionSource),
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Select and Import CSV")
+                        Text(stringResource(R.string.txt_select_and_import_csv_0376ef))
                     }
                 }
             }
@@ -1117,7 +1120,7 @@ fun SettingsScreen(
                 verifyPasswordInput = ""
                 verifyError = null
             },
-            title = { Text("Confirm Master Password") },
+            title = { Text(stringResource(R.string.txt_confirm_master_password_02d580)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text(
@@ -1127,7 +1130,7 @@ fun SettingsScreen(
                     OutlinedTextField(
                         value = verifyPasswordInput,
                         onValueChange = { verifyPasswordInput = it },
-                        label = { Text("Master Password") },
+                        label = { Text(stringResource(R.string.txt_master_password_5654ce)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         visualTransformation = if (verifyPasswordVisible) VisualTransformation.None
@@ -1173,7 +1176,7 @@ fun SettingsScreen(
                     },
                     enabled = verifyPasswordInput.isNotBlank()
                 ) {
-                    Text("Confirm")
+                    Text(stringResource(R.string.txt_confirm_04a212))
                 }
             },
             dismissButton = {
@@ -1184,7 +1187,7 @@ fun SettingsScreen(
                         verifyError = null
                     }
                 ) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -1193,7 +1196,7 @@ fun SettingsScreen(
     if (showRecoveryKeyDialog) {
         AlertDialog(
             onDismissRequest = { showRecoveryKeyDialog = false },
-            title = { Text("Emergency Recovery Key") },
+            title = { Text(stringResource(R.string.txt_emergency_recovery_key_660854)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     Text(
@@ -1228,12 +1231,12 @@ fun SettingsScreen(
                         ClipboardHelper.copyAndScheduleClear(context, "Recovery Key", decryptedRecoveryKey)
                     }
                 ) {
-                    Text("Copy")
+                    Text(stringResource(R.string.txt_copy_af74f7))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showRecoveryKeyDialog = false }) {
-                    Text("Close")
+                    Text(stringResource(R.string.txt_close_bbfa77))
                 }
             }
         )

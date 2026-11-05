@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -64,6 +66,7 @@ import com.aipos.aipospm.ui.viewmodels.PasswordGeneratorViewModel
 import com.aipos.aipospm.ui.viewmodels.PasswordStrength
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,10 +106,10 @@ fun PasswordGeneratorScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Password Generator", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_password_generator_00cac0), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -195,11 +198,11 @@ fun PasswordGeneratorScreen(
                         ) {
                             Icon(
                                 Icons.Default.ContentCopy,
-                                contentDescription = "Copy",
+                                contentDescription = stringResource(R.string.txt_copy_af74f7),
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Copy")
+                            Text(stringResource(R.string.txt_copy_af74f7))
                         }
 
                         FilledTonalButton(
@@ -213,11 +216,11 @@ fun PasswordGeneratorScreen(
                         ) {
                             Icon(
                                 Icons.Default.Casino,
-                                contentDescription = "Regenerate",
+                                contentDescription = stringResource(R.string.txt_regenerate_b04c99),
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Regenerate")
+                            Text(stringResource(R.string.txt_regenerate_b04c99))
                         }
                     }
 
@@ -238,7 +241,7 @@ fun PasswordGeneratorScreen(
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Use This Password", fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.txt_use_this_password_5c8797), fontWeight = FontWeight.SemiBold)
                         }
                     }
                 }
@@ -283,8 +286,8 @@ fun PasswordGeneratorScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("8", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
-                        Text("64", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
+                        Text(stringResource(R.string.txt_8_fe5dbb), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
+                        Text(stringResource(R.string.txt_64_c66c65), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
                     }
                 }
             }
@@ -373,7 +376,7 @@ fun PasswordGeneratorScreen(
                                 ) {
                                     Icon(
                                         Icons.Default.ContentCopy,
-                                        contentDescription = "Copy from history",
+                                        contentDescription = stringResource(R.string.txt_copy_from_history_8e8b7d),
                                         modifier = Modifier.size(18.dp),
                                         tint = MaterialTheme.colorScheme.outline
                                     )

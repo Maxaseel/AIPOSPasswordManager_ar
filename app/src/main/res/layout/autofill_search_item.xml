@@ -13,7 +13,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:src="@drawable/ic_autofill_search"
-        android:contentDescription="Search AIPOS" />
+        android:contentDescription="@string/txt_search_aipos_198ddb" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search AIPOS Vault..."
+            android:text="@string/txt_search_aipos_vault_c6b390"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#006C4C"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Unlock and pick another account"
+            android:text="@string/txt_unlock_and_pick_another_account_31eb2e"
             android:textSize="12sp"
             android:textColor="#43474E"
             android:maxLines="1" />

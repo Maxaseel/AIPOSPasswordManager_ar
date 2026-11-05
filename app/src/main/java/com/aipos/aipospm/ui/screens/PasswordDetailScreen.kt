@@ -1,5 +1,7 @@
 package com.aipos.aipospm.ui.screens
 
+import com.aipos.aipospm.R
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -84,6 +86,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -156,8 +159,8 @@ fun PasswordDetailScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Move to Trash?") },
-            text = { Text("Are you sure you want to move \"${entry?.title}\" to the Trash? You can restore it within 30 days.") },
+            title = { Text(stringResource(R.string.txt_move_to_trash_dc2931)) },
+            text = { Text(stringResource(R.string.txt_move_item_to_trash, entry?.title.orEmpty())) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -169,12 +172,12 @@ fun PasswordDetailScreen(
                         showDeleteDialog = false
                     }
                 ) {
-                    Text("Move to Trash", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.txt_move_to_trash_dffd3b), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.txt_cancel_77dfd2))
                 }
             }
         )
@@ -183,23 +186,23 @@ fun PasswordDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Password Details", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.txt_password_details_2e7131), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = {
                         passwordViewModel.clearSelection()
                         onNavigateBack()
                     }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.txt_back_b52b36))
                     }
                 },
                 actions = {
                     IconButton(onClick = { entry?.id?.let { onNavigateToEdit(it) } }) {
-                        Icon(Icons.Default.Edit, contentDescription = "Edit")
+                        Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.txt_edit_530164))
                     }
                     IconButton(onClick = { showDeleteDialog = true }) {
                         Icon(
                             Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = stringResource(R.string.txt_delete_f6fdbe),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -222,15 +225,15 @@ fun PasswordDetailScreen(
                 if (uiState.isLoading) {
                     CircularProgressIndicator()
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("Loading password...", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.txt_loading_password_41c34a), style = MaterialTheme.typography.bodyLarge)
                 } else {
-                    Text("Password not found", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.txt_password_not_found_256f38), style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
                     Button(onClick = {
                         passwordViewModel.clearSelection()
                         onNavigateBack()
                     }) {
-                        Text("Go Back")
+                        Text(stringResource(R.string.txt_go_back_f03e2d))
                     }
                 }
             }
@@ -343,7 +346,7 @@ fun PasswordDetailScreen(
                             if (entry.isFavorite) {
                                 Icon(
                                     imageVector = Icons.Default.Star,
-                                    contentDescription = "Favorite",
+                                    contentDescription = stringResource(R.string.txt_favorite_6b90b6),
                                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                     modifier = Modifier.size(24.dp)
                                 )
@@ -501,7 +504,7 @@ fun PasswordDetailScreen(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Default.Shield,
-                                        contentDescription = "Breached",
+                                        contentDescription = stringResource(R.string.txt_breached_e24f1b),
                                         tint = MaterialTheme.colorScheme.error,
                                         modifier = Modifier.size(16.dp)
                                     )
@@ -702,7 +705,7 @@ fun PasswordDetailScreen(
                     ) {
                         Icon(Icons.Default.Edit, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Edit")
+                        Text(stringResource(R.string.txt_edit_530164))
                     }
                     OutlinedButton(
                         onClick = { showDeleteDialog = true },
@@ -716,7 +719,7 @@ fun PasswordDetailScreen(
                             tint = MaterialTheme.colorScheme.error
                         )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Delete", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.txt_delete_f6fdbe), color = MaterialTheme.colorScheme.error)
                     }
                 }
 
