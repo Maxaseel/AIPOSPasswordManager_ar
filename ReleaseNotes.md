@@ -1,5 +1,16 @@
 # AIPOS Password Manager — Release Notes
 
+## What's New in v1.6.2 (Localization Readiness & UI Consistency)
+
+AIPOS Password Manager **v1.6.2** moves user-facing Android and Jetpack Compose strings into Android string resources, making the interface easier to translate and maintain. This release prepares the UI for future language packs; it does not itself add an Arabic translation.
+
+### UI resource coverage
+- Extracted screen labels, accessibility descriptions, autofill prompts, validation and error messages, clipboard feedback, and dynamic confirmation text into `strings.xml`.
+- Added formatting placeholders to dynamic messages so translated strings can reorder names and counts.
+- Moved sort labels and vault icon labels into string resources.
+
+---
+
 ## What's New in v1.6.1 (Maintenance & Quality-of-Life Update)
 
 AIPOS Password Manager **v1.6.1** is a focused quality-of-life and stability update bringing seamless inline password generation, navigation refinements, enhanced recovery key flexibility, system security improvements for Android 14+, and camera reliability fixes.
